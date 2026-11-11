@@ -298,13 +298,21 @@ footer nav svg { width: 15px; height: 15px; fill: currentColor; }
 
 /* ---------- kana quiz ---------- */
 .quiz { max-width: 640px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 22px; }
-.q-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.q-tabs { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--paper-2); border: 1px solid var(--line); }
-.q-tabs button { border: 0; background: none; font: inherit; font-size: 14px; font-weight: 700; padding: 7px 14px; border-radius: 999px; color: var(--muted); cursor: pointer; }
-.q-tabs button[aria-pressed="true"] { background: var(--shu); color: #fff; }
-:root[data-theme="dark"] .q-tabs button[aria-pressed="true"] { color: #2a1219; }
-.q-toggle { font-size: 13.5px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
-.q-toggle input { accent-color: var(--shu); width: 16px; height: 16px; }
+.q-top { display: grid; gap: 12px; }
+.q-choose { font-size: 14px; font-weight: 700; color: var(--muted); }
+.q-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.q-tabs button {
+  display: grid; justify-items: center; gap: 2px; padding: 12px 8px; border-radius: 14px; cursor: pointer;
+  border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); font: inherit; font-size: 14px; font-weight: 700;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.q-tabs button span { font-family: "Shippori Mincho", serif; font-size: 24px; line-height: 1.2; color: var(--shu); }
+.q-tabs button:hover { border-color: var(--shu); }
+.q-tabs button[aria-pressed="true"] { background: var(--shu); border-color: var(--shu); color: #fff; }
+.q-tabs button[aria-pressed="true"] span { color: #fff; }
+:root[data-theme="dark"] .q-tabs button[aria-pressed="true"], :root[data-theme="dark"] .q-tabs button[aria-pressed="true"] span { color: #2a1219; }
+.q-toggle { font-size: 14px; color: var(--muted); display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.q-toggle input { accent-color: var(--shu); width: 18px; height: 18px; }
 .q-stage { text-align: center; padding: 26px 0 8px; }
 .q-char { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 120px; line-height: 1.1; min-height: 132px; }
 .q-char.pop { animation: qpop .35s cubic-bezier(.3,1.5,.5,1); }

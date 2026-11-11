@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=9" />
+<link rel="stylesheet" href="style.css?v=10" />
 <script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
 <body>
@@ -139,12 +139,13 @@
     </div>
     <div class="quiz" id="quiz">
       <div class="q-top">
-        <div class="q-tabs" role="group" aria-label="Choose script">
-          <button type="button" data-script="hiragana" aria-pressed="true">ひらがな</button>
-          <button type="button" data-script="katakana" aria-pressed="false">カタカナ</button>
-          <button type="button" data-script="both" aria-pressed="false">Both</button>
+        <p class="q-choose">Choose what to practise:</p>
+        <div class="q-tabs" role="group" aria-label="Choose hiragana, katakana or mix">
+          <button type="button" data-script="hiragana" aria-pressed="true"><span lang="ja">あ</span>Hiragana</button>
+          <button type="button" data-script="katakana" aria-pressed="false"><span lang="ja">ア</span>Katakana</button>
+          <button type="button" data-script="both" aria-pressed="false"><span lang="ja">あ+ア</span>Mix</button>
         </div>
-        <label class="q-toggle"><input type="checkbox" id="q-extra" /> + が・ぱ (dakuten)</label>
+        <label class="q-toggle"><input type="checkbox" id="q-extra" /> Include が・ぱ (dakuten)</label>
       </div>
       <div class="q-stage">
         <div class="q-char" lang="ja" aria-live="polite"></div>
