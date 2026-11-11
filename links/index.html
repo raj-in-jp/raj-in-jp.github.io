@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Raj in JP · 日本語とアニメの世界へ</title>
+<meta name="description" content="Raj in JP: Japanese, anime and culture. Learn Japanese, explore Japan, find your next anime." />
+<meta property="og:title" content="Raj in JP" />
+<meta property="og:description" content="Learn Japanese. Explore Japan. Find your next anime." />
+<meta property="og:image" content="https://raj-in-jp.github.io/rajinjp-desktop.jpg" />
+<meta name="theme-color" content="#0d0a24" />
+<link rel="preload" as="image" href="rajinjp-mobile.jpg" media="(max-width: 768px) and (orientation: portrait)" />
+<link rel="preload" as="image" href="rajinjp-desktop.jpg" media="not all and (max-width: 768px) and (orientation: portrait)" />
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body { background: #0d0a24; overflow: hidden; }
+
+  /* The art always covers the whole screen without stretching. */
+  .card {
+    position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    background: center / 100% 100% no-repeat;
+    container-type: size;
+  }
+
+  /* ---------- COMPUTER / TABLET: wide art (1672x941) ---------- */
+  .card {
+    width: max(100vw, calc(100svh * 1672 / 941));
+    height: max(100svh, calc(100vw * 941 / 1672));
+    background-image: url("rajinjp-desktop.jpg");
+  }
+  .hit { left: 28.89%; width: 42.22%; border-radius: 1.32cqw; }
+  .yt { top: 42.72%; height: 9.78%; }
+  .ig { top: 54.20%; height: 9.67%; }
+  .bc { top: 65.57%; height: 9.67%; }
+  .an { top: 76.83%; height: 9.67%; }
+
+  /* Ultra-wide screens: show the whole art (don't crop the logo) with soft blurred sides */
+  @media (min-aspect-ratio: 1672/941) {
+    body::before {
+      content: ""; position: fixed; inset: -40px;
+      background: url("rajinjp-desktop.jpg") center / cover no-repeat;
+      filter: blur(30px) brightness(.5);
+    }
+    .card { width: calc(100svh * 1672 / 941); height: 100svh;
+            box-shadow: 0 0 80px 20px rgba(13, 10, 36, .9); }
+  }
+
+  /* ---------- PHONE: tall art (1024x2232), full screen ---------- */
+  @media (max-width: 768px) and (orientation: portrait) {
+    body { background: #07050f; }
+    .card {
+      width: max(100vw, calc(100svh * 1024 / 2232));
+      height: max(100svh, calc(100vw * 2232 / 1024));
+      background-image: url("rajinjp-mobile.jpg");
+    }
+    .hit { left: 8.98%; width: 82.03%; border-radius: 999px; }
+    .yt { top: 50.63%; height: 4.93%; }
+    .ig { top: 56.32%; height: 4.93%; }
+    .bc { top: 62.01%; height: 4.75%; }
+    .an { top: 67.52%; height: 4.97%; }
+  }
+
+  #sakura { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+  /* clickable areas over the buttons in the art */
+  .hit {
+    position: absolute;
+    transition: box-shadow .25s ease, transform .15s ease, background .25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hit:hover, .hit:focus-visible {
+    box-shadow: 0 0 0 2px rgba(214, 186, 255, .9), 0 0 30px 6px rgba(165, 110, 255, .7);
+    background: rgba(165, 110, 255, .10);
+    outline: none;
+  }
+  .hit:active { transform: scale(.98); }
+  .yt { animation: pulse 2.8s ease-in-out infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(165, 110, 255, 0); }
+    50%      { box-shadow: 0 0 22px 4px rgba(165, 110, 255, .5); }
+  }
+  .yt:hover, .yt:focus-visible { animation: none; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  @media (prefers-reduced-motion: reduce) { .yt { animation: none; } }
+</style>
+</head>
+<body>
+<main class="card">
+  <canvas id="sakura" aria-hidden="true"></canvas>
+  <h1 class="sr">Raj in JP</h1>
+
+  <!-- ✏️ EDIT YOUR LINKS HERE -->
+  <a class="hit yt" href="https://www.youtube.com/@raj_in_jp" target="_blank" rel="noopener" aria-label="YouTube: Japanese and anime videos"></a>
+  <a class="hit ig" href="https://www.instagram.com/raj_in_jp" target="_blank" rel="noopener" aria-label="Instagram: follow @raj_in_jp"></a>
+  <a class="hit bc" href="https://www.instagram.com/channel/yMf_NWRbB4ieJurp/" target="_blank" rel="noopener" aria-label="Broadcast channel: updates and community"></a>
+  <a class="hit an" href="https://www.instagram.com/channel/-rm9e7hU3mzTN27F/" target="_blank" rel="noopener" aria-label="Watching Anime: anime clips and facts"></a>
+</main>
+
+<script>
+// Falling sakura petals on top of the art
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c = document.getElementById('sakura'), x = c.getContext('2d');
+  let W, H, dpr, P = [];
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const make = (top) => ({
+    x: rnd(0, W), y: top ? -20 : rnd(0, H), s: rnd(4, 9) * dpr,
+    vy: rnd(.35, .9) * dpr, vx: rnd(-.2, .5) * dpr, r: rnd(0, 6.28), vr: rnd(-.03, .03),
+    sw: rnd(0, 6.28), col: Math.random() < .5 ? '255,150,205' : '255,200,230'
+  });
+  const fit = () => {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = c.width = c.clientWidth * dpr; H = c.height = c.clientHeight * dpr;
+    const n = Math.round(Math.min(45, c.clientWidth / 18));
+    while (P.length < n) P.push(make(false));
+    P.length = n;
+  };
+  fit(); addEventListener('resize', fit);
+  (function tick() {
+    x.clearRect(0, 0, W, H);
+    for (const p of P) {
+      p.sw += .03; p.r += p.vr; p.x += p.vx + Math.sin(p.sw) * .5 * dpr; p.y += p.vy;
+      if (p.y > H + 20 || p.x > W + 20) Object.assign(p, make(true));
+      x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.scale(1, Math.abs(Math.cos(p.sw)) * .6 + .4);
+      x.beginPath(); x.moveTo(0, -p.s);
+      x.bezierCurveTo(p.s * .9, -p.s * .6, p.s * .7, p.s * .6, 0, p.s);
+      x.bezierCurveTo(-p.s * .7, p.s * .6, -p.s * .9, -p.s * .6, 0, -p.s);
+      x.fillStyle = `rgba(${p.col},.85)`; x.fill(); x.restore();
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+</body>
+</html>
