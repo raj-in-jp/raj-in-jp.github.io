@@ -3,593 +3,158 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Raj in JP · Japanese, Languages & Anime</title>
-<meta name="description" content="Raj in JP: Japanese lessons from JLPT N5 to N1, language learning, Japan vlogs and anime clips. YouTube, Instagram and broadcast channels." />
+<title>Raj in JP · Japanese, languages & life in Japan</title>
+<meta name="description" content="Raj in JP: self-taught Japanese from N5 to N1 (180/180 in N3). Free hiragana, katakana and JLPT N5 kanji sheets, videos and links." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://raj-in-jp.github.io/" />
-<meta property="og:title" content="Raj in JP · Japanese, Languages & Anime" />
-<meta property="og:description" content="Learn Japanese. Explore Japan. Find your next anime." />
+<meta property="og:title" content="Raj in JP · Japanese, languages & life in Japan" />
+<meta property="og:description" content="Free Japanese study sheets, my JLPT journey, and all my links." />
 <meta property="og:image" content="https://raj-in-jp.github.io/assets/og.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="theme-color" content="#0b0920" />
+<meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#15130f" media="(prefers-color-scheme: dark)" />
 <link rel="icon" href="assets/favicon.png" />
 <link rel="apple-touch-icon" href="assets/avatar.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0b0920;
-    --bg-2: #120e2e;
-    --surface: rgba(255, 255, 255, 0.05);
-    --surface-hi: rgba(255, 255, 255, 0.09);
-    --line: rgba(196, 181, 253, 0.22);
-    --line-hi: rgba(196, 181, 253, 0.55);
-    --text: #f5f3ff;
-    --muted: #b9b3d9;
-    --violet: #a78bfa;
-    --violet-2: #c4b5fd;
-    --pink: #f9a8d4;
-    --torii: #e0475b;
-    --radius: 18px;
-    --max: 1120px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  html, body { overflow-x: clip; }
-  body {
-    background: var(--bg); color: var(--text);
-    font-family: "Zen Kaku Gothic New", system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; text-decoration: none; }
-  img { display: block; max-width: 100%; }
-  .wrap { width: min(var(--max), 100% - 40px); margin-inline: auto; }
-  .jp { font-family: "Zen Kaku Gothic New", sans-serif; }
-  .serif { font-family: "Cinzel", Georgia, serif; }
-
-  /* ---------- nav ---------- */
-  .nav {
-    position: fixed; inset: 0 0 auto 0; z-index: 50;
-    transition: background .3s, border-color .3s, backdrop-filter .3s;
-    border-bottom: 1px solid transparent;
-  }
-  .nav.scrolled {
-    background: rgba(11, 9, 32, .72);
-    backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
-    border-color: var(--line);
-  }
-  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-  .brand { display: flex; align-items: center; gap: 10px; font-family: "Cinzel", serif; font-weight: 700; letter-spacing: .06em; font-size: 18px; }
-  .brand img { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--violet); }
-  .brand b { color: var(--violet-2); font-weight: 700; }
-  .menu { display: flex; gap: 30px; font-size: 14.5px; color: var(--muted); }
-  .menu a { position: relative; transition: color .2s; }
-  .menu a:hover { color: var(--text); }
-  .menu a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--violet); transform: scaleX(0); transition: transform .25s; }
-  .menu a:hover::after { transform: scaleX(1); }
-
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 12px 22px; border-radius: 999px; font-weight: 700; font-size: 15px;
-    transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
-    white-space: nowrap;
-  }
-  .btn svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
-  .btn-primary { background: linear-gradient(135deg, #8b5cf6, #c084fc); color: #fff; box-shadow: 0 8px 28px rgba(139, 92, 246, .45); }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(139, 92, 246, .6); }
-  .btn-ghost { border: 1px solid var(--line-hi); background: rgba(255,255,255,.04); backdrop-filter: blur(8px); }
-  .btn-ghost:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
-  .btn-sm { padding: 9px 16px; font-size: 14px; }
-
-  /* ---------- hero ---------- */
-  .hero {
-    position: relative; min-height: 100svh; display: grid; place-items: center; text-align: center;
-    padding: 110px 0 90px; overflow: hidden; isolation: isolate;
-  }
-  .hero-bg { position: absolute; inset: 0; z-index: -2; background: url("assets/hero.jpg") center / cover no-repeat; transform: scale(1.04); }
-  .hero::after {  /* readability scrim */
-    content: ""; position: absolute; inset: 0; z-index: -1;
-    background:
-      radial-gradient(ellipse 55% 60% at 50% 48%, rgba(11,9,32,.72) 0%, rgba(11,9,32,.25) 70%, transparent 100%),
-      linear-gradient(to bottom, rgba(11,9,32,.35) 0%, transparent 25%, transparent 70%, var(--bg) 100%);
-  }
-  #sakura { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-  .hero-inner { position: relative; z-index: 1; }
-  .avatar {
-    width: 132px; height: 132px; margin: 0 auto 22px; border-radius: 50%; padding: 4px;
-    background: conic-gradient(from 210deg, var(--violet), var(--pink), var(--violet-2), var(--violet));
-    box-shadow: 0 0 50px rgba(167, 139, 250, .55);
-  }
-  .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--bg); }
-  .kicker { font-size: 15px; letter-spacing: .4em; color: var(--pink); margin-bottom: 8px; }
-  h1.title {
-    font-family: "Cinzel", serif; font-weight: 700; line-height: 1.02;
-    font-size: clamp(54px, 10vw, 116px); letter-spacing: .02em;
-    text-shadow: 0 6px 40px rgba(0,0,0,.5);
-  }
-  h1.title .accent {
-    background: linear-gradient(120deg, #c4b5fd 10%, #a78bfa 45%, #f0abfc 90%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .pillars {
-    display: flex; align-items: center; justify-content: center; gap: 16px; margin: 18px auto 10px;
-    font-size: clamp(13px, 1.6vw, 16px); letter-spacing: .3em; text-transform: uppercase; color: var(--text);
-  }
-  .pillars::before, .pillars::after { content: ""; width: clamp(30px, 8vw, 90px); height: 1px; background: linear-gradient(90deg, transparent, var(--violet-2)); }
-  .pillars::after { transform: scaleX(-1); }
-  .pillars i { width: 5px; height: 5px; border-radius: 50%; background: var(--violet); display: inline-block; }
-  .tagline { font-size: clamp(17px, 2vw, 21px); color: var(--muted); font-style: italic; }
-  .tagline em { color: var(--pink); font-style: italic; }
-  .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
-  .scroll-hint { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 1; color: var(--muted); font-size: 12px; letter-spacing: .3em; display: grid; justify-items: center; gap: 8px; }
-  .scroll-hint span { width: 1px; height: 34px; background: linear-gradient(var(--violet-2), transparent); animation: drip 2s ease-in-out infinite; transform-origin: top; }
-  @keyframes drip { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
-
-  /* ---------- sections ---------- */
-  section { padding: 100px 0; position: relative; }
-  .eyebrow { font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--violet-2); margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
-  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--violet); }
-  h2 { font-family: "Cinzel", serif; font-size: clamp(30px, 4vw, 44px); line-height: 1.15; margin-bottom: 14px; }
-  .lead { color: var(--muted); max-width: 620px; font-size: 17px; }
-  .head { margin-bottom: 44px; }
-  .head.center { text-align: center; }
-  .head.center .eyebrow { justify-content: center; }
-  .head.center .eyebrow::after { content: ""; width: 28px; height: 1px; background: var(--violet); }
-  .head.center .lead { margin-inline: auto; }
-
-  /* link cards */
-  .links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-  .lcard {
-    position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 14px;
-    padding: 26px 22px 22px; border-radius: var(--radius);
-    background: linear-gradient(180deg, var(--surface-hi), var(--surface));
-    border: 1px solid var(--line);
-    transition: transform .25s, border-color .25s, box-shadow .25s;
-  }
-  .lcard::before { content: ""; position: absolute; inset: 0; background: radial-gradient(400px 160px at 50% -40%, rgba(167,139,250,.25), transparent 70%); opacity: 0; transition: opacity .3s; }
-  .lcard:hover { transform: translateY(-6px); border-color: var(--line-hi); box-shadow: 0 18px 50px rgba(88, 56, 190, .35); }
-  .lcard:hover::before { opacity: 1; }
-  .ico { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; }
-  .ico svg { width: 28px; height: 28px; fill: #fff; }
-  .ico.yt { background: #ff0033; }
-  .ico.ig { background: radial-gradient(circle at 30% 110%, #ffd776 0%, #f9774c 30%, #d6249f 60%, #6a3cf0 100%); }
-  .ico.bc { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
-  .ico.an { background: linear-gradient(135deg, #db2777, #f472b6); }
-  .lcard h3 { font-size: 19px; font-weight: 700; }
-  .lcard p { color: var(--muted); font-size: 14.5px; line-height: 1.5; flex: 1; }
-  .lcard .go { display: flex; align-items: center; justify-content: space-between; font-size: 13.5px; color: var(--violet-2); font-weight: 700; }
-  .lcard .go span:last-child { transition: transform .25s; }
-  .lcard:hover .go span:last-child { transform: translateX(5px); }
-
-  /* about */
-  .about { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%); }
-  .about-grid { display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: center; }
-  .portrait { position: relative; aspect-ratio: 1; border-radius: 28px; overflow: hidden; border: 1px solid var(--line-hi); box-shadow: 0 30px 80px rgba(70, 40, 160, .45); }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; }
-  .portrait::after { content: "日本語"; position: absolute; right: 14px; top: 14px; writing-mode: vertical-rl; font-size: 14px; letter-spacing: .3em; padding: 10px 6px; border-radius: 8px; background: rgba(11,9,32,.6); color: var(--pink); }
-  .about p { color: var(--muted); margin-bottom: 14px; }
-  .about p.jp-intro { color: var(--text); font-size: 18px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .chip { font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
-  .chip.learn { border-style: dashed; color: var(--muted); }
-  .chips-label { font-size: 12px; letter-spacing: .25em; text-transform: uppercase; color: var(--violet-2); margin-top: 22px; }
-
-  /* topics */
-  .topics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-  .topic { padding: 28px 22px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); transition: border-color .25s, transform .25s; }
-  .topic:hover { border-color: var(--line-hi); transform: translateY(-4px); }
-  .topic .k { font-size: 34px; line-height: 1; margin-bottom: 16px; font-weight: 700; background: linear-gradient(135deg, var(--violet-2), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .topic h3 { font-size: 18px; margin-bottom: 6px; }
-  .topic p { color: var(--muted); font-size: 14.5px; line-height: 1.55; }
-
-  /* videos */
-  .video-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; border: 1px solid var(--line-hi); box-shadow: 0 30px 80px rgba(70, 40, 160, .45); background: #000; }
-  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .video-cta { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
-
-  /* footer */
-  footer { border-top: 1px solid var(--line); padding: 46px 0 40px; text-align: center; background: var(--bg-2); }
-  .socials { display: flex; gap: 12px; justify-content: center; margin-bottom: 18px; }
-  .socials a { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); background: var(--surface); transition: background .2s, border-color .2s, transform .2s; }
-  .socials a:hover { background: var(--surface-hi); border-color: var(--line-hi); transform: translateY(-3px); }
-  .socials svg { width: 20px; height: 20px; fill: var(--text); }
-  footer .jp-line { color: var(--pink); letter-spacing: .3em; margin-bottom: 6px; }
-  footer small { color: var(--muted); letter-spacing: .15em; }
-
-  /* reveal on scroll */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.in { opacity: 1; transform: none; }
-
-  /* ================= MOTION & 3D ================= */
-  /* hero parallax: JS sets --mx/--my (-1..1) from the mouse and --sy from scroll */
-  .hero { --mx: 0; --my: 0; --sy: 0; perspective: 1200px; }
-  .hero-bg {
-    transform: translate3d(calc(var(--mx) * -18px), calc(var(--my) * -12px + var(--sy) * 0.35px), 0) scale(1.08);
-    transition: transform .25s ease-out; will-change: transform;
-  }
-  .moon-glow {  /* breathing glow over the painted moon */
-    position: absolute; z-index: -1; left: 81.25%; top: 20.4%; width: 22vw; height: 22vw; max-width: 380px; max-height: 380px;
-    transform: translate(-50%, -50%) translate3d(calc(var(--mx) * -26px), calc(var(--my) * -18px + var(--sy) * 0.3px), 0);
-    border-radius: 50%; background: radial-gradient(circle, rgba(220, 205, 255, .45), rgba(167, 139, 250, .12) 45%, transparent 70%);
-    animation: breathe 6s ease-in-out infinite; pointer-events: none; transition: transform .25s ease-out;
-  }
-  @keyframes breathe { 50% { opacity: .55; filter: blur(6px); } }
-  .hero-inner {
-    transform-style: preserve-3d;
-    transform: rotateY(calc(var(--mx) * 6deg)) rotateX(calc(var(--my) * -5deg)) translate3d(calc(var(--mx) * 12px), calc(var(--my) * 8px - var(--sy) * 0.15px), 0);
-    transition: transform .3s ease-out;
-  }
-  .hero-inner > * { transform: translateZ(40px); }
-  .hero-inner .avatar { transform: translateZ(90px); }
-  .hero-inner h1 { transform: translateZ(70px); }
-
-  /* floating avatar with orbiting ring */
-  .avatar { position: relative; animation: float 6s ease-in-out infinite; background: none; }
-  .avatar::before {
-    content: ""; position: absolute; inset: -6px; border-radius: 50%; z-index: -1;
-    background: conic-gradient(from 0deg, var(--violet), var(--pink), transparent 40%, var(--violet-2), var(--violet));
-    animation: spin 6s linear infinite; filter: blur(.5px);
-  }
-  .avatar::after { content: ""; position: absolute; inset: -18px; border-radius: 50%; border: 1px dashed rgba(196,181,253,.35); animation: spin 30s linear infinite reverse; }
-  @keyframes float { 50% { translate: 0 -10px; } }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* title letters flip in */
-  .title .ch { display: inline-block; opacity: 0; transform: rotateX(-90deg) translateY(30px); transform-origin: 50% 100%;
-    animation: flipin .9s cubic-bezier(.2,.8,.2,1.2) forwards; }
-  .title .accent .ch { background: inherit; -webkit-background-clip: text; background-clip: text; }
-  @keyframes flipin { to { opacity: 1; transform: none; } }
-  .fade-up { opacity: 0; animation: fadeup .9s ease forwards; }
-  @keyframes fadeup { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-
-  /* 3D tilt cards with moving glare (JS sets --rx --ry --gx --gy) */
-  .tilt { transform-style: preserve-3d; transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
-    transition: transform .5s cubic-bezier(.2,.8,.2,1), border-color .25s, box-shadow .25s; }
-  .tilt.active { transition: transform .08s linear, border-color .25s, box-shadow .25s; --lift: -6px; }
-  .tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-    background: radial-gradient(500px circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,.14), transparent 40%);
-    opacity: 0; transition: opacity .3s; }
-  .tilt.active::after { opacity: 1; }
-  .tilt > * { transform: translateZ(30px); }
-  .lcard:hover, .topic:hover { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-6px); }
-  .topic { position: relative; overflow: hidden; }
-
-  /* 3D reveal */
-  .reveal { transform: perspective(900px) translateY(40px) rotateX(12deg); transform-origin: 50% 100%; }
-  .reveal.in { transform: none; }
-
-  /* magnetic buttons */
-  .btn { will-change: transform; }
-
-  /* Japanese word marquee */
-  .marquee { overflow: hidden; border-block: 1px solid var(--line); background: linear-gradient(90deg, rgba(167,139,250,.08), rgba(249,168,212,.08)); padding: 18px 0; transform: rotate(-1.2deg) scale(1.02); margin: -10px 0 0; position: relative; z-index: 2; }
-  .marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 38s linear infinite; font-size: 22px; white-space: nowrap; }
-  .marquee-track span { display: inline-flex; align-items: center; gap: 48px; color: var(--violet-2); }
-  .marquee-track span::after { content: "✿"; color: var(--pink); font-size: 16px; }
-  .marquee-track b { color: var(--text); font-weight: 700; }
-  @keyframes marquee { to { transform: translateX(-50%); } }
-
-  /* cursor glow (desktop only) */
-  .cursor-glow { position: fixed; left: 0; top: 0; width: 420px; height: 420px; margin: -210px 0 0 -210px; border-radius: 50%; pointer-events: none; z-index: 1;
-    background: radial-gradient(circle, rgba(167,139,250,.14), transparent 65%); transform: translate3d(-500px,-500px,0); transition: opacity .3s; mix-blend-mode: screen; }
-  @media (hover: none) { .cursor-glow { display: none; } }
-
-  /* about portrait for a round logo */
-  .portrait { background: radial-gradient(circle at 50% 40%, #2a1f5c, #0b0920 75%); display: grid; place-items: center; }
-  .portrait img { width: 86%; height: 86%; object-fit: contain; border-radius: 50%; animation: float 7s ease-in-out infinite; filter: drop-shadow(0 20px 40px rgba(0,0,0,.5)); }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-bg, .moon-glow, .hero-inner, .tilt { transform: none !important; }
-    .avatar, .avatar::before, .avatar::after, .marquee-track, .moon-glow, .portrait img { animation: none; }
-    .title .ch, .fade-up { animation: none; opacity: 1; transform: none; }
-  }
-
-  /* ---------- responsive ---------- */
-  @media (max-width: 960px) {
-    .links, .topics { grid-template-columns: repeat(2, 1fr); }
-    .about-grid { grid-template-columns: 1fr; gap: 36px; }
-    .portrait { max-width: 300px; margin-inline: auto; }
-    .menu { display: none; }
-  }
-  @media (max-width: 560px) {
-    .wrap { width: calc(100% - 32px); }
-    section { padding: 72px 0; }
-    .links, .topics { grid-template-columns: 1fr; }
-    .lcard { flex-direction: row; align-items: center; padding: 16px; gap: 14px; }
-    .lcard p { display: none; }
-    .lcard .go { margin-left: auto; }
-    .lcard .go span:first-child { display: none; }
-    .lcard h3 { font-size: 17px; }
-    .lcard small { display: block; color: var(--muted); font-size: 13px; font-weight: 400; }
-    .avatar { width: 108px; height: 108px; }
-    .pillars { letter-spacing: .18em; gap: 10px; }
-    .brand span.full { display: none; }
-    .cta .btn { flex: 1 1 100%; justify-content: center; }
-  }
-  @media (min-width: 561px) { .lcard small { display: none; } }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .scroll-hint span { animation: none; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css?v=2" />
+<script>
+  // apply saved theme before paint (no flash)
+  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
 </head>
 <body>
+<p class="vertical" aria-hidden="true">一歩ずつ、日本語の世界へ</p>
 
-<!-- ============ NAV ============ -->
-<header class="nav" id="nav">
-  <div class="wrap">
-    <a class="brand" href="#top"><img src="assets/avatar.png" alt="" /><span>RAJ IN <b>JP</b></span></a>
-    <nav class="menu" aria-label="Main">
-      <a href="#links">Links</a>
-      <a href="#about">About</a>
-      <a href="#topics">Topics</a>
-      <a href="#videos">Videos</a>
+<div class="page">
+  <div class="topbar">
+    <span class="mini-seal" aria-hidden="true">ラジ</span>
+    <button class="theme" id="theme" type="button" aria-label="Switch light or dark mode"><span class="sun">☀︎</span><span class="moon">☾</span></button>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="intro">
+    <div class="enso-wrap">
+      <svg class="enso" viewBox="0 0 200 200" aria-hidden="true">
+        <path d="M100 14 C150 12 188 52 186 102 C184 150 146 188 98 186 C50 184 14 146 16 98 C18 62 40 34 72 20" />
+      </svg>
+      <img class="avatar" src="assets/avatar.png" alt="Raj in JP logo: a white fox under cherry blossoms" width="120" height="120" />
+    </div>
+    <h1>Raj in JP <span class="seal" aria-hidden="true">日本</span></h1>
+    <p class="handle">@raj_in_jp</p>
+    <p class="bio">🇮🇳 → 🇯🇵 Self-taught Japanese, N5 → N1 · <b>180/180</b> in N3<br />Languages · vlogs · anime</p>
+    <p class="welcome">こんにちは! Whether you're starting hiragana or aiming for N1, I hope something here makes your study a little easier.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://www.youtube.com/@raj_in_jp?sub_confirmation=1" target="_blank" rel="noopener" data-track="Subscribe (header)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
+        Subscribe
+      </a>
+      <a class="btn" href="https://www.instagram.com/raj_in_jp" target="_blank" rel="noopener" data-track="Instagram (header)">Follow on Instagram</a>
+    </div>
+  </header>
+
+  <!-- ============ LINKS ============ -->
+  <section>
+    <h2><span class="jp-label">繋がる</span>Links</h2>
+    <nav class="rows">
+      <a class="row" href="https://www.youtube.com/@raj_in_jp" target="_blank" rel="noopener">
+        <span class="ico">▶</span>
+        <span class="txt"><b>YouTube</b><small>Japanese lessons, JLPT tips, vlogs &amp; song lyrics</small></span>
+        <span class="arr">›</span>
+      </a>
+      <a class="row" href="https://www.instagram.com/raj_in_jp" target="_blank" rel="noopener">
+        <span class="ico">◎</span>
+        <span class="txt"><b>Instagram</b><small>Daily life in Japan · @raj_in_jp</small></span>
+        <span class="arr">›</span>
+      </a>
+      <a class="row" href="https://www.instagram.com/channel/yMf_NWRbB4ieJurp/" target="_blank" rel="noopener">
+        <span class="ico">〆</span>
+        <span class="txt"><b>Broadcast channel</b><small>Updates, announcements &amp; community</small></span>
+        <span class="arr">›</span>
+      </a>
+      <a class="row" href="https://www.instagram.com/channel/-rm9e7hU3mzTN27F/" target="_blank" rel="noopener">
+        <span class="ico">❀</span>
+        <span class="txt"><b>Watching Anime</b><small>Anime clips &amp; facts</small></span>
+        <span class="arr">›</span>
+      </a>
     </nav>
-    <a class="btn btn-primary btn-sm" href="https://www.youtube.com/@raj_in_jp?sub_confirmation=1" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
-      Subscribe
-    </a>
-  </div>
-</header>
+  </section>
 
-<!-- ============ HERO ============ -->
-<main id="top">
-<section class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="moon-glow" aria-hidden="true"></div>
-  <canvas id="sakura" aria-hidden="true"></canvas>
-  <div class="hero-inner wrap">
-    <div class="avatar fade-up"><img src="assets/avatar.png" alt="Raj in JP logo" /></div>
-    <p class="kicker jp fade-up" style="animation-delay:.2s">日本語とアニメの世界へ</p>
-    <h1 class="title" data-split>Raj in <span class="accent">JP</span></h1>
-    <p class="pillars fade-up" style="animation-delay:.9s">Japanese <i></i> Anime <i></i> Culture</p>
-    <p class="tagline fade-up" style="animation-delay:1.1s">Learn Japanese. Explore Japan. Find your next <em>anime</em>.</p>
-    <div class="cta fade-up" style="animation-delay:1.3s">
-      <a class="btn btn-primary" href="https://www.youtube.com/@raj_in_jp" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
-        Watch on YouTube
+  <!-- ============ FREE DOWNLOADS ============ -->
+  <section>
+    <h2><span class="jp-label">無料</span>Free study sheets</h2>
+    <p class="note">Printable PDFs. Free to download, print and share.</p>
+    <div class="rows">
+      <a class="row" href="free/hiragana-chart-raj-in-jp.pdf" download data-track="Hiragana chart">
+        <span class="ico kana">あ</span>
+        <span class="txt"><b>Hiragana chart (ひらがな)</b><small>All 46 + dakuten &amp; combinations · 2 pages</small></span>
+        <span class="arr">↓</span>
       </a>
-      <a class="btn btn-ghost" href="https://www.instagram.com/raj_in_jp" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 2.2c2.7 0 3 0 4 .1 2.7.1 4 1.4 4.1 4.1.1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.7-1.4 4-4.1 4.1-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.7-.1-4-1.4-4.1-4.1-.1-1-.1-1.3-.1-4s0-3 .1-4C4 3.7 5.3 2.4 8 2.3c1-.1 1.3-.1 4-.1ZM12 0C9.3 0 8.9 0 7.9.1 4.2.2 2.2 2.2 2.1 5.9 2 6.9 2 7.3 2 10v4c0 2.7 0 3.1.1 4.1.1 3.7 2.1 5.7 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c3.7-.1 5.7-2.1 5.8-5.8.1-1 .1-1.4.1-4.1v-4c0-2.7 0-3.1-.1-4.1C21.8 2.2 19.8.2 16.1.1 15.1 0 14.7 0 12 0Z"/></svg>
-        Follow @raj_in_jp
+      <a class="row" href="free/katakana-chart-raj-in-jp.pdf" download data-track="Katakana chart">
+        <span class="ico kana">ア</span>
+        <span class="txt"><b>Katakana chart (カタカナ)</b><small>All 46 + dakuten &amp; combinations · 2 pages</small></span>
+        <span class="arr">↓</span>
+      </a>
+      <a class="row" href="free/jlpt-n5-kanji-raj-in-jp.pdf" download data-track="N5 kanji list">
+        <span class="ico kana">漢</span>
+        <span class="txt"><b>JLPT N5 kanji list (漢字)</b><small>All 75 kanji with meanings &amp; readings · 4 pages</small></span>
+        <span class="arr">↓</span>
       </a>
     </div>
-  </div>
-  <a class="scroll-hint" href="#links" aria-label="Scroll down"><span></span>SCROLL</a>
-</section>
+  </section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span><b>日本語</b> Japanese</span><span><b>JLPT</b> N5 → N1</span><span><b>アニメ</b> Anime</span><span><b>文化</b> Culture</span><span><b>旅</b> Travel</span><span><b>言葉</b> Languages</span><span><b>一歩ずつ</b> Step by step</span>
-    <span><b>日本語</b> Japanese</span><span><b>JLPT</b> N5 → N1</span><span><b>アニメ</b> Anime</span><span><b>文化</b> Culture</span><span><b>旅</b> Travel</span><span><b>言葉</b> Languages</span><span><b>一歩ずつ</b> Step by step</span>
-  </div>
+  <!-- ============ VIDEOS ============ -->
+  <section>
+    <h2><span class="jp-label">動画</span>My Japanese journey</h2>
+    <div class="videos">
+      <a class="video" href="https://www.youtube.com/shorts/iw4L_PAmMgY" target="_blank" rel="noopener" data-track="Video: N5-N1 journey">
+        <img src="videos/iw4L_PAmMgY.jpg" alt="" loading="lazy" width="320" height="320" />
+        <span class="vt"><b>Self-taught N5 → N1, 180/180 in N3</b><small>1.2K+ views</small></span>
+        <span class="play">▶ Watch</span>
+      </a>
+      <a class="video" href="https://www.youtube.com/shorts/HQrxe6ceLlU" target="_blank" rel="noopener" data-track="Video: Mount Fuji">
+        <img src="videos/HQrxe6ceLlU.jpg" alt="" loading="lazy" width="320" height="320" />
+        <span class="vt"><b>On top of Mount Fuji 🗻</b><small>350+ views</small></span>
+        <span class="play">▶ Watch</span>
+      </a>
+      <a class="video" href="https://www.youtube.com/watch?v=AS7S5NZ4tcQ" target="_blank" rel="noopener" data-track="Video: Sparkle lyrics">
+        <img src="videos/AS7S5NZ4tcQ.jpg" alt="" loading="lazy" width="320" height="320" />
+        <span class="vt"><b>Sparkle (君の名は) lyrics in hiragana &amp; English</b><small>800+ views</small></span>
+        <span class="play">▶ Watch</span>
+      </a>
+    </div>
+    <a class="more" href="https://www.youtube.com/@raj_in_jp/shorts" target="_blank" rel="noopener">See all videos on YouTube ›</a>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about">
+    <h2><span class="jp-label">私</span>About</h2>
+    <p>Hi, I'm Raj. I share Japanese, languages, vlogs and my journey of learning languages, from JLPT N5 to N1. I speak Tamil, Telugu, Hindi and English, and I'm learning Korean, German, Indonesian and Tagalog.</p>
+    <p class="motto">「言葉を楽しむ」 <span>Enjoy languages.</span></p>
+  </section>
+
+  <footer>
+    <span class="seal big" aria-hidden="true">ラジ<br />日本</span>
+    <p class="jp-line">一歩ずつ、一緒に。</p>
+    <small>© <span id="yr">2026</span> Raj in JP · <a href="links/">classic link page</a></small>
+    <small class="credit">Kanji data: KANJIDIC2 © EDRDG, CC BY-SA 4.0</small>
+  </footer>
 </div>
-<div class="cursor-glow" id="glow" aria-hidden="true"></div>
-
-<!-- ============ LINKS ============ -->
-<section id="links">
-  <div class="wrap">
-    <div class="head center reveal">
-      <p class="eyebrow">Find me everywhere</p>
-      <h2>Join the journey</h2>
-      <p class="lead">Lessons, vlogs, anime clips and community updates, all in one place.</p>
-    </div>
-    <div class="links">
-      <!-- ✏️ EDIT YOUR LINKS HERE -->
-      <a class="lcard reveal" href="https://www.youtube.com/@raj_in_jp" target="_blank" rel="noopener">
-        <div class="ico yt"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg></div>
-        <div><h3>YouTube<small>Japanese &amp; anime videos</small></h3></div>
-        <p>Japanese lessons from JLPT N5 to N1, study tips, vlogs and edits.</p>
-        <div class="go"><span>Subscribe</span><span>→</span></div>
-      </a>
-      <a class="lcard reveal" href="https://www.instagram.com/raj_in_jp" target="_blank" rel="noopener">
-        <div class="ico ig"><svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 2.2c2.7 0 3 0 4 .1 2.7.1 4 1.4 4.1 4.1.1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.7-1.4 4-4.1 4.1-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.7-.1-4-1.4-4.1-4.1-.1-1-.1-1.3-.1-4s0-3 .1-4C4 3.7 5.3 2.4 8 2.3c1-.1 1.3-.1 4-.1ZM12 0C9.3 0 8.9 0 7.9.1 4.2.2 2.2 2.2 2.1 5.9 2 6.9 2 7.3 2 10v4c0 2.7 0 3.1.1 4.1.1 3.7 2.1 5.7 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c3.7-.1 5.7-2.1 5.8-5.8.1-1 .1-1.4.1-4.1v-4c0-2.7 0-3.1-.1-4.1C21.8 2.2 19.8.2 16.1.1 15.1 0 14.7 0 12 0Z"/></svg></div>
-        <div><h3>Instagram<small>Follow @raj_in_jp</small></h3></div>
-        <p>Daily life in Japan, reels and behind-the-scenes. Follow @raj_in_jp.</p>
-        <div class="go"><span>Follow</span><span>→</span></div>
-      </a>
-      <a class="lcard reveal" href="https://www.instagram.com/channel/yMf_NWRbB4ieJurp/" target="_blank" rel="noopener">
-        <div class="ico bc"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4l1.4-1.4a6 6 0 0 1 0-8.6L6.3 6.3Zm11.4 0-1.4 1.4a6 6 0 0 1 0 8.6l1.4 1.4a8 8 0 0 0 0-11.4ZM3.5 3.5a12 12 0 0 0 0 17l1.4-1.4a10 10 0 0 1 0-14.2L3.5 3.5Zm17 0-1.4 1.4a10 10 0 0 1 0 14.2l1.4 1.4a12 12 0 0 0 0-17Z"/></svg></div>
-        <div><h3>Broadcast Channel<small>Updates &amp; community</small></h3></div>
-        <p>Updates, announcements and exclusive posts for the community.</p>
-        <div class="go"><span>Join</span><span>→</span></div>
-      </a>
-      <a class="lcard reveal" href="https://www.instagram.com/channel/-rm9e7hU3mzTN27F/" target="_blank" rel="noopener">
-        <div class="ico an"><svg viewBox="0 0 24 24"><path d="M4 9h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9Zm6 2.5v6l5-3-5-3ZM3.6 4.4l15.3-2.7.4 2-15.3 2.7zM5 7.5 3.7 3.6M9.5 6.7 8.2 2.8M14 5.9l-1.3-3.9"/><path d="M3.3 4.5 18.8 1.8l.6 3.1L3.9 7.6z"/></svg></div>
-        <div><h3>Watching Anime<small>Anime clips &amp; facts</small></h3></div>
-        <p>Anime clips, fun facts and recommendations for your watchlist.</p>
-        <div class="go"><span>Join</span><span>→</span></div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ABOUT ============ -->
-<section id="about" class="about">
-  <div class="wrap about-grid">
-    <div class="portrait reveal"><img src="assets/avatar.png" alt="Raj" /></div>
-    <div class="reveal">
-      <p class="eyebrow">About</p>
-      <h2>Hi, I'm Raj</h2>
-      <p class="jp-intro jp">こんにちは！Rajです🇯🇵「言葉を楽しむ」をテーマに発信しています。</p>
-      <p>I share Japanese, languages, vlogs, video edits and my journey of learning languages: from JLPT N5 to N1, Japanese study tips, Japanese vlogs and everything I discover along the way. Let's explore the world of languages together!</p>
-      <p class="chips-label">I speak</p>
-      <div class="chips"><span class="chip">Tamil</span><span class="chip">Telugu</span><span class="chip">Hindi</span><span class="chip">English</span><span class="chip">日本語</span></div>
-      <p class="chips-label">Learning</p>
-      <div class="chips"><span class="chip learn">Korean</span><span class="chip learn">German</span><span class="chip learn">Indonesian</span><span class="chip learn">Tagalog</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TOPICS ============ -->
-<section id="topics">
-  <div class="wrap">
-    <div class="head center reveal">
-      <p class="eyebrow">What I make</p>
-      <h2>言葉を楽しむ</h2>
-      <p class="lead">Enjoying languages, one video at a time.</p>
-    </div>
-    <div class="topics">
-      <div class="topic reveal"><div class="k">N5→N1</div><h3>JLPT Japanese</h3><p>Grammar, vocabulary and study methods for every JLPT level.</p></div>
-      <div class="topic reveal"><div class="k">🎥</div><h3>Japanese Vlogs</h3><p>Everyday life in Japan, in Japanese, so you learn while you watch.</p></div>
-      <div class="topic reveal"><div class="k">🌍</div><h3>Languages</h3><p>The real process of learning Korean, German, Indonesian and Tagalog.</p></div>
-      <div class="topic reveal"><div class="k">✨</div><h3>Anime &amp; Edits</h3><p>Anime clips, fun facts and video edits for fellow fans.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ VIDEOS ============ -->
-<section id="videos">
-  <div class="wrap">
-    <div class="head center reveal">
-      <p class="eyebrow">Latest on YouTube</p>
-      <h2>Watch now</h2>
-      <p class="lead">My newest uploads. New videos every week.</p>
-    </div>
-    <div class="video-frame reveal">
-      <!-- always plays the channel's latest uploads -->
-      <iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/videoseries?list=UURov6GlcLYItZHPawH6tc5w" title="Raj in JP: latest videos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-    <div class="video-cta reveal">
-      <a class="btn btn-primary" href="https://www.youtube.com/@raj_in_jp?sub_confirmation=1" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
-        Subscribe on YouTube
-      </a>
-      <a class="btn btn-ghost" href="https://www.youtube.com/@raj_in_jp/videos" target="_blank" rel="noopener">See all videos →</a>
-    </div>
-  </div>
-</section>
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="wrap">
-    <div class="socials">
-      <a href="https://www.youtube.com/@raj_in_jp" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg></a>
-      <a href="https://www.instagram.com/raj_in_jp" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 2.2c2.7 0 3 0 4 .1 2.7.1 4 1.4 4.1 4.1.1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.7-1.4 4-4.1 4.1-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.7-.1-4-1.4-4.1-4.1-.1-1-.1-1.3-.1-4s0-3 .1-4C4 3.7 5.3 2.4 8 2.3c1-.1 1.3-.1 4-.1ZM12 0C9.3 0 8.9 0 7.9.1 4.2.2 2.2 2.2 2.1 5.9 2 6.9 2 7.3 2 10v4c0 2.7 0 3.1.1 4.1.1 3.7 2.1 5.7 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c3.7-.1 5.7-2.1 5.8-5.8.1-1 .1-1.4.1-4.1v-4c0-2.7 0-3.1-.1-4.1C21.8 2.2 19.8.2 16.1.1 15.1 0 14.7 0 12 0Z"/></svg></a>
-      <a href="https://github.com/raj-in-jp" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg></a>
-    </div>
-    <p class="jp-line jp">日本語とアニメの世界へ</p>
-    <small>© <span id="yr">2026</span> RAJ IN JP</small>
-  </div>
-</footer>
 
 <script>
-// nav background after scrolling
-const nav = document.getElementById('nav');
-const onScroll = () => nav.classList.toggle('scrolled', scrollY > 30);
-onScroll(); addEventListener('scroll', onScroll, { passive: true });
 document.getElementById('yr').textContent = new Date().getFullYear();
-
-// reveal sections as they scroll into view
-const io = new IntersectionObserver((es) => es.forEach((e) => {
-  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-}), { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
-
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-// split the title into letters that flip in one by one
-document.querySelectorAll('[data-split]').forEach((el) => {
-  let i = 0;
-  const walk = (node) => [...node.childNodes].forEach((n) => {
-    if (n.nodeType === 3) {
-      const frag = document.createDocumentFragment();
-      for (const ch of n.textContent) {
-        const s = document.createElement('span'); s.className = 'ch';
-        s.textContent = ch === ' ' ? ' ' : ch; s.style.animationDelay = (0.35 + i++ * 0.06) + 's';
-        frag.appendChild(s);
-      }
-      n.replaceWith(frag);
-    } else walk(n);
-  });
-  walk(el);
+// light / dark toggle (remembers your choice)
+document.getElementById('theme').addEventListener('click', () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
 });
-
-// hero parallax from mouse + scroll
-const hero = document.querySelector('.hero');
-let mx = 0, my = 0;
-if (!reduce) {
-  if (finePointer) addEventListener('mousemove', (e) => {
-    mx = (e.clientX / innerWidth) * 2 - 1; my = (e.clientY / innerHeight) * 2 - 1;
-    hero.style.setProperty('--mx', mx.toFixed(3)); hero.style.setProperty('--my', my.toFixed(3));
-  }, { passive: true });
-  addEventListener('scroll', () => { if (scrollY < innerHeight * 1.2) hero.style.setProperty('--sy', scrollY.toFixed(0)); }, { passive: true });
-}
-
-// 3D tilt + glare on cards
-if (!reduce && finePointer) document.querySelectorAll('.lcard, .topic, .video-frame, .portrait').forEach((el) => {
-  el.classList.add('tilt');
-  el.addEventListener('mousemove', (e) => {
-    const r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-    const k = el.classList.contains('video-frame') ? 4 : 12;
-    el.style.setProperty('--ry', ((px - .5) * k).toFixed(2) + 'deg');
-    el.style.setProperty('--rx', ((.5 - py) * k).toFixed(2) + 'deg');
-    el.style.setProperty('--gx', (px * 100).toFixed(1) + '%'); el.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
-    el.classList.add('active');
-  });
-  el.addEventListener('mouseleave', () => { el.classList.remove('active'); el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
-});
-
-// magnetic buttons
-if (!reduce && finePointer) document.querySelectorAll('.btn').forEach((b) => {
-  b.addEventListener('mousemove', (e) => {
-    const r = b.getBoundingClientRect();
-    b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .25}px, ${(e.clientY - r.top - r.height / 2) * .35}px)`;
-  });
-  b.addEventListener('mouseleave', () => { b.style.transform = ''; });
-});
-
-// soft glow that follows the cursor
-const glow = document.getElementById('glow');
-if (!reduce && finePointer) addEventListener('mousemove', (e) => { glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`; }, { passive: true });
-
-// falling sakura in the hero, with depth: near petals are bigger, faster and react more to the mouse
-(() => {
-  if (reduce) return;
-  const c = document.getElementById('sakura'), x = c.getContext('2d');
-  let W, H, dpr, P = [];
-  const rnd = (a, b) => a + Math.random() * (b - a);
-  const make = (top) => {
-    const z = Math.random();                      // 0 = far, 1 = near
-    return {
-      x: rnd(0, W), y: top ? -30 : rnd(0, H), z, s: (3 + z * 10) * dpr,
-      vy: (.25 + z * 1.0) * dpr, vx: rnd(-.1, .4) * dpr, r: rnd(0, 6.28), vr: rnd(-.03, .03),
-      sw: rnd(0, 6.28), a: .35 + z * .6, col: Math.random() < .5 ? '255,150,205' : '255,200,230'
-    };
-  };
-  const fit = () => {
-    dpr = Math.min(devicePixelRatio || 1, 2);
-    W = c.width = c.clientWidth * dpr; H = c.height = c.clientHeight * dpr;
-    const n = Math.round(Math.min(40, c.clientWidth / 20));
-    while (P.length < n) P.push(make(false));
-    P.length = n;
-  };
-  fit(); addEventListener('resize', fit);
-  let visible = true;
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(c);
-  (function tick() {
-    if (visible) {
-      x.clearRect(0, 0, W, H);
-      for (const p of P) {
-        p.sw += .03; p.r += p.vr;
-        p.x += p.vx + Math.sin(p.sw) * .5 * dpr + mx * p.z * 1.2 * dpr;   // mouse "wind"
-        p.y += p.vy;
-        if (p.y > H + 30 || p.x > W + 30 || p.x < -30) Object.assign(p, make(true));
-        x.save(); x.translate(p.x, p.y); x.rotate(p.r);
-        x.scale(Math.abs(Math.sin(p.sw * .7)) * .5 + .5, Math.abs(Math.cos(p.sw)) * .6 + .4);   // 3D flutter
-        x.beginPath(); x.moveTo(0, -p.s);
-        x.bezierCurveTo(p.s * .9, -p.s * .6, p.s * .7, p.s * .6, 0, p.s);
-        x.bezierCurveTo(-p.s * .7, p.s * .6, -p.s * .9, -p.s * .6, 0, -p.s);
-        x.fillStyle = `rgba(${p.col},${p.a})`; x.fill(); x.restore();
-      }
-    }
-    requestAnimationFrame(tick);
-  })();
-})();
+// gentle fade-in as sections scroll into view
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
+document.querySelectorAll('section, footer').forEach((el) => io.observe(el));
 </script>
+<script src="analytics.js?v=1" defer></script>
 </body>
 </html>

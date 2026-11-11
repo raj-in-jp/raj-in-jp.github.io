@@ -1,5 +1,9 @@
 # Raj in JP
 
-Website: https://raj-in-jp.github.io (link page: /links)
+Website: https://raj-in-jp.github.io
 
-Watch · Learn · Explore: Anime, Japan and more.
+- `index.html`, `style.css`: the site (minimal washi-paper theme, light/dark)
+- `free/`: free study sheet PDFs (kanji data: KANJIDIC2 (c) EDRDG, CC BY-SA 4.0)
+- `videos/`: video thumbnails
+- `analytics.js`: paste your Google Analytics ID to turn on visit stats
+- `links/`: the classic image link page
