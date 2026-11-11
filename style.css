@@ -233,24 +233,67 @@ footer nav svg { width: 15px; height: 15px; fill: currentColor; }
 @media (max-width: 1080px) { .sheets { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .sheets { grid-template-columns: 1fr; } }
 
-/* ---------- kanji of the day ---------- */
-.kotd {
-  display: grid; grid-template-columns: 260px 1fr; width: 100%; max-width: 900px; text-align: left; font: inherit; color: inherit; cursor: pointer;
-  border-radius: 20px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow);
-  transition: border-color .2s, transform .2s, box-shadow .2s; padding: 0;
+/* ---------- kanji practice ---------- */
+.kp { max-width: 760px; }
+.kp-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
+.kp-levels { display: inline-flex; gap: 8px; }
+.kp-levels button {
+  display: grid; justify-items: center; min-width: 64px; padding: 8px 12px; border-radius: 12px; cursor: pointer;
+  border: 1.5px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-weight: 700; font-size: 16px; line-height: 1.2;
 }
-.kotd:hover { border-color: var(--shu); transform: translateY(-3px); }
-.kotd-left { position: relative; display: grid; place-items: center; padding: 44px 20px 40px; min-height: 260px; background: var(--shu-soft); border-right: 1px solid var(--line); }
-.kotd-date { position: absolute; top: 16px; left: 18px; font-size: 12.5px; letter-spacing: .12em; color: var(--shu); font-weight: 700; }
-.kotd-left .lv { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); }
-.kotd-kanji { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 140px; line-height: 1; }
-.kotd-right { padding: 32px 36px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
-.kotd-reading { font-family: "Shippori Mincho", serif; color: var(--shu); font-size: 18px; }
-.kotd-meaning { font-family: "Shippori Mincho", serif; font-size: 28px; line-height: 1.25; font-weight: 700; text-transform: capitalize; }
-.kotd-story { color: var(--muted); font-size: 16px; margin-top: 6px; }
-.kotd-open { margin-top: 14px; font-weight: 700; color: var(--shu); font-size: 15px; }
+.kp-levels button small { font-size: 11px; font-weight: 500; color: var(--muted); }
+.kp-levels button:hover { border-color: var(--shu); }
+.kp-levels button[aria-pressed="true"] { background: var(--shu); border-color: var(--shu); color: #fff; }
+.kp-levels button[aria-pressed="true"] small { color: rgba(255,255,255,.85); }
+.kp-modes { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--paper-2); border: 1px solid var(--line); }
+.kp-modes button { border: 0; background: none; font: inherit; font-size: 14.5px; font-weight: 700; padding: 8px 16px; border-radius: 999px; color: var(--muted); cursor: pointer; }
+.kp-modes button[aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
+:root[data-theme="dark"] .kp-levels button[aria-pressed="true"] { color: #2a1219; }
+
+/* flashcard (3D flip) */
+.kp-cards { display: grid; justify-items: center; gap: 16px; }
+.fc-scene { width: min(420px, 100%); aspect-ratio: 4 / 3.4; perspective: 1200px; }
+.fc { position: relative; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; font: inherit; color: inherit;
+  transform-style: preserve-3d; transition: transform .6s cubic-bezier(.3,.7,.3,1); }
+.fc.flipped { transform: rotateY(180deg); }
+.fc-face { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 8px; padding: 24px; border-radius: 22px;
+  background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); backface-visibility: hidden; -webkit-backface-visibility: hidden; text-align: center; }
+.fc-front { background: linear-gradient(160deg, var(--card), var(--shu-soft)); }
+.fc-back { transform: rotateY(180deg); }
+.fc-lv { position: absolute; top: 16px; left: 16px; }
+.fc-k { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: clamp(110px, 24vw, 150px); line-height: 1; }
+.fc-hint { position: absolute; bottom: 14px; font-size: 12.5px; color: var(--muted); }
+.fc-k-small { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 44px; line-height: 1; color: var(--shu); }
+.fc-m { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 26px; line-height: 1.25; }
+.fc-read { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; font-size: 17px; color: var(--shu); }
+.fc-read small { font-size: 11px; color: var(--muted); margin-right: 6px; font-family: "Zen Kaku Gothic New", sans-serif; }
+.fc-ex { font-size: 14px; color: var(--muted); max-width: 320px; }
+.fc-ex b { font-family: "Shippori Mincho", serif; color: var(--ink); font-size: 17px; }
+.fc-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.fc-controls .btn { cursor: pointer; font-family: inherit; color: var(--ink); }
+.fc-count { min-width: 80px; text-align: center; font-weight: 700; color: var(--muted); font-size: 14px; }
+.fc-learn { cursor: pointer; font-family: inherit; }
+
+/* kanji quiz */
+.kq { border-radius: 20px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 22px; text-align: center; }
+.kq[hidden], .kp-cards[hidden], .kq-after[hidden] { display: none; }
+.kq-ask { font-weight: 700; color: var(--muted); font-size: 14px; }
+.kq-k { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 120px; line-height: 1.15; }
+.kq-k.pop { animation: qpop .35s cubic-bezier(.3,1.5,.5,1); }
+.kq-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
+.kq-opt { font-size: 16.5px; padding: 16px 10px; }
+.kq-fb { min-height: 28px; margin-top: 14px; font-weight: 700; }
+.kq-fb.ok { color: #3d9a52; } .kq-fb.no { color: var(--shu); }
+.kq-fb span { font-weight: 500; color: var(--muted); }
+.kq-after { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+.kq-after .btn { cursor: pointer; font-family: inherit; }
+.kq-after .btn:not(.primary) { color: var(--ink); }
+.kq-stats { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+.kq-stats b { color: var(--ink); }
+.km-ex li.none { color: var(--muted); font-size: 14px; }
+
 .lv { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; padding: 3px 10px; border-radius: 999px; color: #fff; white-space: nowrap; }
-.lv-n5 { background: #4c9a6a; } .lv-n4 { background: #3f86b5; } .lv-n3 { background: #c98a2e; } .lv-n2 { background: #cf5476; } .lv-n1 { background: #7b4bb3; }
+.lv-n5 { background: #4c9a6a; } .lv-n4 { background: #3f86b5; } .lv-n3 { background: #c98a2e; }
 
 /* kanji pop-up */
 .kmodal {
@@ -343,11 +386,11 @@ footer nav svg { width: 15px; height: 15px; fill: currentColor; }
 .q-skip { margin-left: auto; border: 0; background: none; font: inherit; font-weight: 700; color: var(--shu); cursor: pointer; }
 
 @media (max-width: 720px) {
-  .kotd { grid-template-columns: 1fr; }
-  .kotd-left { border-right: 0; border-bottom: 1px solid var(--line); min-height: 200px; padding: 30px; }
-  .kotd-kanji { font-size: 110px; }
-  .kotd-right { padding: 24px 22px 26px; }
-  .kotd-meaning { font-size: 24px; }
+  .kp-bar { flex-direction: column; align-items: stretch; }
+  .kp-levels { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .kp-modes { display: grid; grid-template-columns: 1fr 1fr; }
+  .kq-opts { grid-template-columns: 1fr; }
+  .kq-k { font-size: 100px; }
   .km-top { grid-template-columns: 1fr; justify-items: center; text-align: center; }
   .km-badges, .km-read div { justify-content: center; }
   .km-info h3 { padding-right: 0; }
@@ -356,4 +399,4 @@ footer nav svg { width: 15px; height: 15px; fill: currentColor; }
   .q-char { font-size: 104px; }
   .quiz { padding: 18px; }
 }
-@media (prefers-reduced-motion: reduce) { .kmodal[open], .q-char.pop, .q-opt.wrong { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .kmodal[open], .q-char.pop, .kq-k.pop, .q-opt.wrong { animation: none; } .fc { transition: none; } }

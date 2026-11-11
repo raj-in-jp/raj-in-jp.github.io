@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=10" />
+<link rel="stylesheet" href="style.css?v=11" />
 <script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
 <body>
@@ -81,27 +81,73 @@
 
 
 
-<!-- ============ KANJI OF THE DAY ============ -->
+<!-- ============ KANJI PRACTICE ============ -->
 <section id="kanji" class="block">
-  <div class="container kotd-wrap">
+  <div class="container">
     <div class="head">
-      <span class="label">今日の漢字</span>
-      <h2>Kanji of the day</h2>
-      <p>A new kanji every day from all 612 JLPT N5–N3 kanji, with its level, meaning, breakdown and stroke order. Tap the card to open it.</p>
+      <span class="label">漢字</span>
+      <h2>Kanji practice</h2>
+      <p>All 612 JLPT N5–N3 kanji. Pick a level, then study with flashcards or test yourself with the quiz.</p>
     </div>
-    <button class="kotd" id="kotd" type="button" aria-haspopup="dialog">
-      <span class="kotd-left">
-        <span class="kotd-date"></span>
-        <span class="kotd-kanji" lang="ja"></span>
-        <span class="lv kotd-lv"></span>
-      </span>
-      <span class="kotd-right">
-        <span class="kotd-reading" lang="ja"></span>
-        <span class="kotd-meaning"></span>
-        <span class="kotd-story"></span>
-        <span class="kotd-open">Open breakdown &amp; history →</span>
-      </span>
-    </button>
+    <div class="kp" id="kp">
+      <div class="kp-bar">
+        <div class="kp-levels" role="group" aria-label="Choose JLPT level">
+          <button type="button" data-lv="N5" aria-pressed="true">N5<small>79</small></button>
+          <button type="button" data-lv="N4" aria-pressed="false">N4<small>166</small></button>
+          <button type="button" data-lv="N3" aria-pressed="false">N3<small>367</small></button>
+          <button type="button" data-lv="ALL" aria-pressed="false">All<small>612</small></button>
+        </div>
+        <div class="kp-modes" role="tablist" aria-label="Choose mode">
+          <button type="button" role="tab" data-mode="cards" aria-selected="true">🃏 Flashcards</button>
+          <button type="button" role="tab" data-mode="quiz" aria-selected="false">✅ Quiz</button>
+        </div>
+      </div>
+
+      <!-- flashcards -->
+      <div class="kp-cards" data-panel="cards">
+        <div class="fc-scene">
+          <button type="button" class="fc" id="fc" aria-label="Flip card">
+            <span class="fc-face fc-front">
+              <span class="lv fc-lv"></span>
+              <span class="fc-k" lang="ja"></span>
+              <span class="fc-hint">Tap to flip ↻</span>
+            </span>
+            <span class="fc-face fc-back">
+              <span class="fc-k-small" lang="ja"></span>
+              <span class="fc-m"></span>
+              <span class="fc-read" lang="ja"></span>
+              <span class="fc-ex" lang="ja"></span>
+              <span class="fc-hint">Tap to flip back ↻</span>
+            </span>
+          </button>
+        </div>
+        <div class="fc-controls">
+          <button type="button" class="btn sm fc-prev" aria-label="Previous card">←</button>
+          <span class="fc-count"></span>
+          <button type="button" class="btn sm fc-next" aria-label="Next card">→</button>
+          <button type="button" class="btn sm fc-shuffle">🔀 Shuffle</button>
+        </div>
+        <button type="button" class="btn primary fc-learn">📖 Learn about this kanji</button>
+      </div>
+
+      <!-- quiz -->
+      <div class="kq" data-panel="quiz" hidden>
+        <p class="kq-ask">What does this kanji mean?</p>
+        <div class="kq-k" lang="ja"></div>
+        <div class="kq-opts"></div>
+        <p class="kq-fb" aria-live="polite"></p>
+        <div class="kq-after" hidden>
+          <button type="button" class="btn kq-learn">📖 Learn about this kanji</button>
+          <button type="button" class="btn primary kq-next">Next →</button>
+        </div>
+        <div class="kq-stats">
+          <span>Score <b class="kq-score">0/0</b></span>
+          <span>Streak <b class="kq-streak">0</b> 🔥</span>
+          <span>Best <b class="kq-best">0</b> 🌸</span>
+          <button type="button" class="q-skip kq-skip">Skip ›</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -124,7 +170,7 @@
   <ul class="km-ex" lang="ja"></ul>
   <div class="km-actions">
     <a class="btn primary sm km-reel" href="#" target="_blank" rel="noopener">▶ Watch my reel</a>
-    <button type="button" class="btn sm km-random">🎲 Another kanji</button>
+    
   </div>
   <p class="km-credit">Levels: JLPT lists by Jonathan Waller · Meanings &amp; readings: KANJIDIC2 (EDRDG, CC BY-SA 4.0) · Parts &amp; stroke order: KanjiVG (CC BY-SA 3.0)</p>
 </dialog>
@@ -135,7 +181,7 @@
     <div class="head">
       <span class="label">クイズ</span>
       <h2>Kana quiz</h2>
-      <p>What's the romaji? Pick the right answer. How long can your streak go?</p>
+      <p>What's the romaji? Each round goes through every kana once: 46 hiragana, 46 katakana, or all 92 in Mix.</p>
     </div>
     <div class="quiz" id="quiz">
       <div class="q-top">
@@ -153,6 +199,7 @@
         <p class="q-feedback" aria-live="polite"></p>
       </div>
       <div class="q-bottom">
+        <span>Progress <b class="q-prog">0/46</b></span>
         <span>Score <b class="q-score">0/0</b></span>
         <span>Streak <b class="q-streak">0</b> 🔥</span>
         <span>Best <b class="q-best">0</b> 🌸</span>
@@ -266,8 +313,8 @@ document.querySelectorAll('.block, .strip, footer').forEach((el) => io.observe(e
 })();
 </script>
 <script src="assets/kana-data.js?v=1"></script>
-<script src="assets/kanji-data.js?v=4"></script>
-<script src="app.js?v=6"></script>
+<script src="assets/kanji-data.js?v=5"></script>
+<script src="app.js?v=7"></script>
 <script src="analytics.js?v=1" defer></script>
 </body>
 </html>
