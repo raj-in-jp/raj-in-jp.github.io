@@ -1,25 +1,25 @@
 /* Raj in JP · minimal washi-paper website */
 :root {
-  --paper: #f6f1e7;
-  --paper-2: #efe8da;
-  --card: #fffdf8;
-  --ink: #1f1d1a;
-  --muted: #6f685d;
-  --line: #e3dacb;
-  --shu: #c8402f;
-  --shu-soft: rgba(200, 64, 47, .08);
+  --paper: #fbf6f3;
+  --paper-2: #f7ebe9;
+  --card: #fffcfb;
+  --ink: #2a2124;
+  --muted: #7a6a6e;
+  --line: #efdcdc;
+  --shu: #cf5476;          /* sakura pink (deep) */
+  --shu-soft: rgba(207, 84, 118, .09);
   --shadow: 0 1px 2px rgba(60, 40, 20, .05), 0 8px 24px rgba(60, 40, 20, .06);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #15130f; --paper-2: #1a1814; --card: #201d19; --ink: #ece6da; --muted: #a39b8d; --line: #2f2b25;
-    --shu: #e0604c; --shu-soft: rgba(224, 96, 76, .12); --shadow: none; color-scheme: dark;
+    --paper: #171214; --paper-2: #1d1619; --card: #231b1e; --ink: #f1e6e9; --muted: #b29fa5; --line: #36292d;
+    --shu: #f08aa6; --shu-soft: rgba(240, 138, 166, .12); --shadow: none; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #15130f; --paper-2: #1a1814; --card: #201d19; --ink: #ece6da; --muted: #a39b8d; --line: #2f2b25;
-  --shu: #e0604c; --shu-soft: rgba(224, 96, 76, .12); --shadow: none; color-scheme: dark;
+  --paper: #171214; --paper-2: #1d1619; --card: #231b1e; --ink: #f1e6e9; --muted: #b29fa5; --line: #36292d;
+  --shu: #f08aa6; --shu-soft: rgba(240, 138, 166, .12); --shadow: none; color-scheme: dark;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,6 +44,8 @@ img { display: block; max-width: 100%; }
 }
 .btn:hover { border-color: var(--shu); transform: translateY(-1px); }
 .btn.primary { background: var(--shu); border-color: var(--shu); color: #fff; }
+:root[data-theme="dark"] .btn.primary { color: #2a1219; }
+.btn svg { width: 17px; height: 17px; fill: currentColor; flex: none; }
 .btn.primary:hover { filter: brightness(1.07); }
 .btn.sm { padding: 7px 16px; font-size: 14px; }
 .more { display: inline-block; margin-top: 18px; font-weight: 700; color: var(--shu); }
@@ -208,3 +210,25 @@ footer small { color: var(--muted); font-size: 12px; opacity: .8; }
   .seal { animation: none; transform: rotate(-5deg); }
   .block, .strip, footer { opacity: 1; transform: none; transition: none; }
 }
+
+/* ---------- sakura petals ---------- */
+#sakura { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 40; }
+
+/* ---------- brand logos ---------- */
+.links a { display: flex; align-items: center; gap: 14px; padding-right: 44px; }
+.logo { flex: none; width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; }
+.logo svg { width: 22px; height: 22px; fill: #fff; }
+.logo.l-yt { background: #ff0033; }
+.logo.l-ig { background: radial-gradient(circle at 30% 110%, #ffd776 0%, #f9774c 28%, #d6249f 58%, #6a3cf0 100%); }
+.logo.l-bc { background: linear-gradient(135deg, #8b5cf6, #c084fc); }
+.logo.l-an { background: linear-gradient(135deg, #e0577d, #f59fb6); }
+footer nav a { display: inline-flex; align-items: center; gap: 6px; }
+footer nav svg { width: 15px; height: 15px; fill: currentColor; }
+
+/* ---------- 4 study sheets ---------- */
+.sheets { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.sheet { padding: 26px 22px 22px; }
+.sheet .big { font-size: 54px; display: flex; align-items: baseline; gap: 8px; }
+.sheet .big i { font-style: normal; font-size: 16px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; }
+@media (max-width: 1080px) { .sheets { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .sheets { grid-template-columns: 1fr; } }
