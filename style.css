@@ -290,7 +290,8 @@ footer nav svg { width: 15px; height: 15px; fill: currentColor; }
 .km-ex span { color: var(--shu); font-size: 14px; }
 .km-ex em { font-style: normal; color: var(--muted); font-size: 14px; }
 .km-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-.km-reel[hidden] { display: none; }
+.km-reel[hidden], .km-h[hidden], .km-hh[hidden] { display: none; }
+.km-stroke .fallback { fill: var(--ink); font-family: "Shippori Mincho", serif; }
 .km-note { font-style: normal; color: var(--muted); font-size: 14px; }
 .km-random { cursor: pointer; font-family: inherit; color: var(--ink); }
 .km-credit { margin-top: 16px; font-size: 11px; color: var(--muted); opacity: .8; }

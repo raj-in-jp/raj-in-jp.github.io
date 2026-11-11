@@ -22,24 +22,37 @@
   const lv = card.querySelector('.kotd-lv'); lv.textContent = 'JLPT ' + kTd.lv; lv.className = lvClass(kTd.lv) + ' kotd-lv';
   card.querySelector('.kotd-reading').textContent = [...kTd.kun.slice(0, 1), ...kTd.on.slice(0, 1)].join(' · ');
   card.querySelector('.kotd-meaning').textContent = kTd.m.join(', ');
-  card.querySelector('.kotd-story').textContent = kTd.h;
+  card.querySelector('.kotd-story').textContent = kTd.h || builtFrom(kTd);
 
   let timers = [];
-  const drawStrokes = (k) => {
+  const strokeCache = {};
+  const drawStrokes = async (k) => {
     timers.forEach(clearTimeout); timers = [];
     const svg = $('.km-stroke svg');
-    svg.innerHTML = '<path d="M54.5 2v105M2 54.5h105" class="grid"/>' + k.st.map((d) => `<path d="${d}" class="st"/>`).join('');
+    svg.innerHTML = '<path d="M54.5 2v105M2 54.5h105" class="grid"/>';
+    let paths = strokeCache[k.k];
+    if (!paths) {
+      try { paths = strokeCache[k.k] = await (await fetch(`assets/strokes/${k.k.codePointAt(0).toString(16).padStart(5, '0')}.json`)).json(); }
+      catch (e) { svg.innerHTML += `<text x="54.5" y="76" text-anchor="middle" font-size="64" class="fallback">${esc(k.k)}</text>`; return; }
+    }
+    if ($('.km-k').textContent !== k.k) return;   // user moved on
+    svg.innerHTML += paths.map((d) => `<path d="${d}" class="st"/>`).join('');
     svg.querySelectorAll('.st').forEach((p, i) => {
       const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
-      timers.push(setTimeout(() => { p.style.transition = 'stroke-dashoffset .5s ease'; p.style.strokeDashoffset = 0; }, 250 + i * 520));
+      timers.push(setTimeout(() => { p.style.transition = 'stroke-dashoffset .5s ease'; p.style.strokeDashoffset = 0; }, 250 + i * 480));
     });
   };
+  function builtFrom(k) {
+    return k.p.length === 1 && k.p[0][0] === k.k
+      ? 'A single picture (pictograph), not built from other parts.'
+      : 'Built from ' + k.p.map(([c, m]) => m ? `${c} (${m})` : c).join(' + ') + '.';
+  }
   const open = (k) => {
     $('.km-k').textContent = k.k; $('.km-m').textContent = k.m.join(', ');
     const l = $('.km-lv'); l.textContent = 'JLPT ' + k.lv; l.className = lvClass(k.lv) + ' km-lv';
     $('.km-sc').textContent = `${k.sc} stroke${k.sc === 1 ? '' : 's'}`;
     $('.km-on').textContent = k.on.join('・') || '—'; $('.km-kun').textContent = k.kun.join('・') || '—';
-    $('.km-h').textContent = k.h;
+    $('.km-h').textContent = k.h || ''; $('.km-h').hidden = $('.km-hh').hidden = !k.h;
     const single = k.p.length === 1 && k.p[0][0] === k.k;
     $('.km-p').innerHTML = single
       ? `<span class="whole"><b>${esc(k.k)}</b>${esc(k.p[0][1])}</span><em class="km-note">A single picture (pictograph), not built from other parts.</em>`
