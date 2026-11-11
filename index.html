@@ -7,8 +7,10 @@
 <meta name="description" content="Raj in JP: watch, learn, explore. Anime, Japan and more." />
 <meta property="og:title" content="Raj in JP" />
 <meta property="og:description" content="Watch · Learn · Explore: Anime, Japan and more." />
-<meta property="og:image" content="rajinjp.jpg" />
+<meta property="og:image" content="https://raj-in-jp.github.io/rajinjp.jpg" />
 <meta name="theme-color" content="#07050f" />
+<link rel="preload" as="image" href="rajinjp-mobile.jpg" media="(max-width: 768px) and (orientation: portrait)" />
+<link rel="preload" as="image" href="rajinjp.jpg" media="not all and (max-width: 768px) and (orientation: portrait)" />
 <style>
   * { box-sizing: border-box; margin: 0; }
   html, body { min-height: 100%; }
@@ -17,7 +19,8 @@
     display: flex; justify-content: center; align-items: center;
     min-height: 100svh; overflow-x: hidden;
   }
-  /* on wide screens, a blurred copy of the art fills the sides */
+
+  /* ---------- DESKTOP / TABLET: the art as a glowing card, blurred art behind ---------- */
   body::before {
     content: ""; position: fixed; inset: -40px; z-index: 0;
     background: url("rajinjp.jpg") center / cover no-repeat;
@@ -25,16 +28,40 @@
   }
   .card {
     position: relative; z-index: 1;
-    width: 100%; max-width: 520px;
+    width: min(520px, 100vw, calc(100svh * 1024 / 1536));
     aspect-ratio: 1024 / 1536;
     background: url("rajinjp.jpg") center / 100% 100% no-repeat;
     box-shadow: 0 0 80px rgba(155, 92, 255, .35);
+    border-radius: 18px; overflow: hidden;
   }
+  /* button positions in the 1024x1536 art */
+  .hit { top: var(--t); height: var(--h); }
+  .yt { --t: 54.04%; --tm: 50.63%; --h: 7.16%; --hm: 4.93%; }
+  .ig { --t: 62.30%; --tm: 56.32%; --h: 7.16%; --hm: 4.93%; }
+  .bc { --t: 70.57%; --tm: 62.01%; --h: 6.90%; --hm: 4.75%; }
+  .an { --t: 78.58%; --tm: 67.52%; --h: 7.23%; --hm: 4.97%; }
+
+  /* ---------- PHONE: full screen, using the extended tall art (1024x2232) ---------- */
+  @media (max-width: 768px) and (orientation: portrait) {
+    body { overflow: hidden; height: 100svh; }
+    body::before { display: none; }
+    .card {
+      position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      /* cover the whole screen without stretching */
+      width: max(100vw, calc(100svh * 1024 / 2232));
+      height: max(100svh, calc(100vw * 2232 / 1024));
+      aspect-ratio: auto;
+      background-image: url("rajinjp-mobile.jpg");
+      border-radius: 0; box-shadow: none;
+    }
+    .hit { top: var(--tm); height: var(--hm); }
+  }
+
   #sakura { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
-  /* clickable areas placed exactly over the buttons in the art */
+  /* clickable areas over the buttons in the art */
   .hit {
-    position: absolute; left: 9.2%; width: 81.8%; height: 7.9%;
+    position: absolute; left: 8.98%; width: 82.03%;
     border-radius: 999px;
     transition: box-shadow .25s ease, transform .15s ease, background .25s ease;
     -webkit-tap-highlight-color: transparent;
@@ -45,10 +72,6 @@
     outline: none;
   }
   .hit:active { transform: scale(.97); }
-  .yt { top: 55.0%; }
-  .ig { top: 64.4%; }
-  .an { top: 73.6%; }
-  /* a soft pulse so people know the buttons are tappable */
   .yt { animation: pulse 2.8s ease-in-out infinite; }
   @keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(155, 92, 255, 0); }
@@ -66,7 +89,8 @@
   <!-- ✏️ EDIT YOUR LINKS HERE -->
   <a class="hit yt" href="https://www.youtube.com/@raj_in_jp" target="_blank" rel="noopener" aria-label="Subscribe on YouTube"></a>
   <a class="hit ig" href="https://www.instagram.com/raj_in_jp" target="_blank" rel="noopener" aria-label="Follow on Instagram"></a>
-  <a class="hit an" href="https://www.instagram.com/channel/-rm9e7hU3mzTN27F/" target="_blank" rel="noopener" aria-label="Watching Anime: anime clips and facts"></a>
+  <a class="hit bc" href="https://www.instagram.com/channel/-rm9e7hU3mzTN27F/" target="_blank" rel="noopener" aria-label="Join my broadcast channel"></a>
+  <a class="hit an" href="https://www.youtube.com/@raj_in_jp/shorts" target="_blank" rel="noopener" aria-label="Watching Anime: anime clips and facts"></a>
 </main>
 
 <script>
@@ -86,7 +110,7 @@
     vy: rnd(.35, .9) * dpr, vx: rnd(-.2, .5) * dpr, r: rnd(0, 6.28), vr: rnd(-.03, .03),
     sw: rnd(0, 6.28), col: Math.random() < .5 ? '255,150,205' : '255,200,230'
   });
-  const P = Array.from({ length: 22 }, () => make(false));
+  const P = Array.from({ length: 24 }, () => make(false));
   (function tick() {
     x.clearRect(0, 0, W, H);
     for (const p of P) {
