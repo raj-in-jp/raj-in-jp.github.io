@@ -1,57 +1,59 @@
 /* Raj in JP · Kanji of the day + Kana quiz */
 
 /* ================= KANJI OF THE DAY =================
-   ✏️ Add new kanji stories to this list. One is shown per day, in order, looping. */
-const KANJI_STORIES = [
-  { k: '躾', reading: 'しつけ · shitsuke', meaning: 'Discipline / good manners',
-    parts: [['身', 'body'], ['美', 'beauty']],
-    story: 'Body + beauty = good manners. True elegance is not just how you look, but how you behave.',
-    reel: 'https://www.instagram.com/p/DfZt8gOByLu/' },
-  { k: '幸', reading: 'しあわせ · shiawase', meaning: 'Happiness / good fortune',
-    parts: [['辛', 'painful'], ['一', 'one stroke']],
-    story: 'Add one stroke to 辛 (pain) and you get 幸 (happiness). One small change makes a big difference.',
-    reel: 'https://www.instagram.com/p/DfUkVanBULO/' },
-  { k: '島', reading: 'しま · shima', meaning: 'Island',
-    parts: [['鳥', 'bird'], ['山', 'mountain']],
-    story: 'Imagine a bird flying over a mountain surrounded by water. That is an island!',
-    reel: 'https://www.instagram.com/p/DfcSsjFBSXL/' },
-  { k: '烏', reading: 'からす · karasu', meaning: 'Crow',
-    parts: [['鳥', 'bird'], ['、', 'eye stroke']], op: '−',
-    story: 'Look closely: 烏 is 鳥 (bird) without the little stroke for the eye. A crow is so black you cannot see its eye.',
-    reel: 'https://www.instagram.com/p/Dfe3gndh_58/' },
-  { k: '咲', reading: 'さく · saku', meaning: 'To bloom',
-    parts: [['口', 'mouth'], ['笑', 'to laugh']],
-    story: 'A mouth that laughs: flowers don’t just bloom, they laugh their way into bloom.',
-    reel: 'https://www.instagram.com/p/DfhcUPpB7aZ/' },
-  { k: '国', reading: 'くに · kuni', meaning: 'Country',
-    parts: [['國', 'old form'], ['国', 'modern form']], op: '→',
-    story: 'The old form 國 had a weapon (戈) inside. The modern 国 has a jewel (玉). Weapon out, jewel in!',
-    reel: 'https://www.instagram.com/p/DfkBMT_BUTa/' },
-  { k: '聴', reading: 'きく · kiku', meaning: 'To listen attentively',
-    parts: [['耳', 'ear'], ['心', 'heart']],
-    story: '聞く is to hear; 聴く is to really listen. Listen with your ears, understand with your mind, connect with your heart.',
-    reel: 'https://www.instagram.com/p/DfXJL5ThzPC/' },
-];
-
+   A different kanji every day, picked at random from KANJI_POOL (assets/kanji-data.js).
+   Tap the card to open its level, meaning, history, breakdown, examples and stroke order. */
 (() => {
-  const el = document.getElementById('kotd');
-  if (!el) return;
+  const card = document.getElementById('kotd'), dlg = document.getElementById('kmodal');
+  if (!card || !window.KANJI_POOL) return;
+  const P = KANJI_POOL, $ = (s) => dlg.querySelector(s);
   const now = new Date();
-  const day = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / 864e5);
-  let i = ((day % KANJI_STORIES.length) + KANJI_STORIES.length) % KANJI_STORIES.length;
-  const render = (anim) => {
-    const s = KANJI_STORIES[i];
-    el.querySelector('.kotd-kanji').textContent = s.k;
-    el.querySelector('.kotd-reading').textContent = s.reading;
-    el.querySelector('.kotd-meaning').textContent = s.meaning;
-    el.querySelector('.kotd-parts').innerHTML = s.parts.map(([c, m]) => `<span><b>${c}</b>${m}</span>`).join(`<i>${s.op || '+'}</i>`);
-    el.querySelector('.kotd-story').textContent = s.story;
-    el.querySelector('.kotd-reel').href = s.reel;
-    el.querySelector('.kotd-date').textContent = now.toLocaleDateString(undefined, { month: 'long', day: 'numeric' });
-    if (anim) { el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
+  const dayNum = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 864e5);
+  // same "random" kanji for everyone on the same day, different every day
+  const rand = (n) => { let x = (n * 2654435761) >>> 0; x ^= x >>> 16; x = Math.imul(x, 2246822507) >>> 0; x ^= x >>> 13; return x >>> 0; };
+  let today = rand(dayNum) % P.length;
+  if (today === rand(dayNum - 1) % P.length) today = (today + 1) % P.length;
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const lvClass = (lv) => 'lv lv-' + lv.toLowerCase();
+
+  const kTd = P[today];
+  card.querySelector('.kotd-date').textContent = now.toLocaleDateString(undefined, { month: 'long', day: 'numeric' });
+  card.querySelector('.kotd-kanji').textContent = kTd.k;
+  const lv = card.querySelector('.kotd-lv'); lv.textContent = 'JLPT ' + kTd.lv; lv.className = lvClass(kTd.lv) + ' kotd-lv';
+  card.querySelector('.kotd-reading').textContent = [...kTd.kun.slice(0, 1), ...kTd.on.slice(0, 1)].join(' · ');
+  card.querySelector('.kotd-meaning').textContent = kTd.m.join(', ');
+  card.querySelector('.kotd-story').textContent = kTd.h;
+
+  let timers = [];
+  const drawStrokes = (k) => {
+    timers.forEach(clearTimeout); timers = [];
+    const svg = $('.km-stroke svg');
+    svg.innerHTML = '<path d="M54.5 2v105M2 54.5h105" class="grid"/>' + k.st.map((d) => `<path d="${d}" class="st"/>`).join('');
+    svg.querySelectorAll('.st').forEach((p, i) => {
+      const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
+      timers.push(setTimeout(() => { p.style.transition = 'stroke-dashoffset .5s ease'; p.style.strokeDashoffset = 0; }, 250 + i * 520));
+    });
   };
-  render(false);
-  el.querySelector('.kotd-next').addEventListener('click', () => { i = (i + 1) % KANJI_STORIES.length; render(true); });
+  const open = (k) => {
+    $('.km-k').textContent = k.k; $('.km-m').textContent = k.m.join(', ');
+    const l = $('.km-lv'); l.textContent = 'JLPT ' + k.lv; l.className = lvClass(k.lv) + ' km-lv';
+    $('.km-sc').textContent = `${k.sc} stroke${k.sc === 1 ? '' : 's'}`;
+    $('.km-on').textContent = k.on.join('・') || '—'; $('.km-kun').textContent = k.kun.join('・') || '—';
+    $('.km-h').textContent = k.h;
+    const single = k.p.length === 1 && k.p[0][0] === k.k;
+    $('.km-p').innerHTML = single
+      ? `<span class="whole"><b>${esc(k.k)}</b>${esc(k.p[0][1])}</span><em class="km-note">A single picture (pictograph), not built from other parts.</em>`
+      : `<span class="whole"><b>${esc(k.k)}</b></span><i>=</i>` + k.p.map(([c, m]) => `<span><b>${esc(c)}</b>${m ? esc(m) : ''}</span>`).join('<i>+</i>');
+    $('.km-ex').innerHTML = k.ex.length ? k.ex.map((e) => `<li><b>${esc(e.w)}</b><span>${esc(e.r)}</span><em>${esc(e.m)}</em></li>`).join('') : '<li>—</li>';
+    const reel = $('.km-reel'); reel.hidden = !k.reel; if (k.reel) reel.href = k.reel;
+    if (!dlg.open) dlg.showModal();
+    drawStrokes(k);
+  };
+  card.addEventListener('click', () => open(kTd));
+  $('.km-replay').addEventListener('click', () => drawStrokes(P.find((x) => x.k === $('.km-k').textContent)));
+  $('.km-random').addEventListener('click', () => { let r; do { r = P[Math.floor(Math.random() * P.length)]; } while (r.k === $('.km-k').textContent); open(r); });
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });   // tap outside to close
+  dlg.addEventListener('close', () => { timers.forEach(clearTimeout); });
 })();
 
 /* ================= KANA QUIZ ================= */

@@ -235,27 +235,65 @@ footer nav svg { width: 15px; height: 15px; fill: currentColor; }
 
 /* ---------- kanji of the day ---------- */
 .kotd {
-  display: grid; grid-template-columns: 260px 1fr; gap: 0; border-radius: 20px; overflow: hidden;
-  background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); max-width: 900px;
+  display: grid; grid-template-columns: 260px 1fr; width: 100%; max-width: 900px; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  border-radius: 20px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow);
+  transition: border-color .2s, transform .2s, box-shadow .2s; padding: 0;
 }
-.kotd.flip { animation: kflip .5s ease; }
-@keyframes kflip { from { opacity: .2; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-.kotd-left {
-  position: relative; display: grid; place-items: center; padding: 40px 20px; min-height: 260px;
-  background: var(--shu-soft); border-right: 1px solid var(--line);
-}
+.kotd:hover { border-color: var(--shu); transform: translateY(-3px); }
+.kotd-left { position: relative; display: grid; place-items: center; padding: 44px 20px 40px; min-height: 260px; background: var(--shu-soft); border-right: 1px solid var(--line); }
 .kotd-date { position: absolute; top: 16px; left: 18px; font-size: 12.5px; letter-spacing: .12em; color: var(--shu); font-weight: 700; }
-.kotd-kanji { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 140px; line-height: 1; color: var(--ink); }
-.kotd-right { padding: 34px 36px; display: flex; flex-direction: column; justify-content: center; }
+.kotd-left .lv { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); }
+.kotd-kanji { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 140px; line-height: 1; }
+.kotd-right { padding: 32px 36px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
 .kotd-reading { font-family: "Shippori Mincho", serif; color: var(--shu); font-size: 18px; }
-.kotd-meaning { font-family: "Shippori Mincho", serif; font-size: 28px; line-height: 1.25; margin: 2px 0 14px; }
-.kotd-parts { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-.kotd-parts span { display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); font-size: 13px; color: var(--muted); }
-.kotd-parts b { font-family: "Shippori Mincho", serif; font-size: 22px; color: var(--ink); }
-.kotd-parts i { font-style: normal; color: var(--shu); font-weight: 700; }
-.kotd-story { color: var(--muted); font-size: 16px; }
-.kotd-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-.kotd-next { cursor: pointer; font-family: inherit; color: var(--ink); }
+.kotd-meaning { font-family: "Shippori Mincho", serif; font-size: 28px; line-height: 1.25; font-weight: 700; text-transform: capitalize; }
+.kotd-story { color: var(--muted); font-size: 16px; margin-top: 6px; }
+.kotd-open { margin-top: 14px; font-weight: 700; color: var(--shu); font-size: 15px; }
+.lv { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; padding: 3px 10px; border-radius: 999px; color: #fff; white-space: nowrap; }
+.lv-n5 { background: #4c9a6a; } .lv-n4 { background: #3f86b5; } .lv-n3 { background: #c98a2e; } .lv-n2 { background: #cf5476; } .lv-n1 { background: #7b4bb3; }
+
+/* kanji pop-up */
+.kmodal {
+  width: min(640px, calc(100% - 24px)); max-height: calc(100dvh - 24px); margin: auto; padding: 30px 30px 24px; border: 1px solid var(--line);
+  border-radius: 22px; background: var(--card); color: var(--ink); box-shadow: 0 30px 80px rgba(40, 10, 20, .25); overflow: auto;
+}
+.kmodal::backdrop { background: rgba(30, 15, 20, .45); backdrop-filter: blur(3px); }
+.kmodal[open] { animation: kin .3s ease; }
+@keyframes kin { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+.km-close { position: absolute; top: 14px; right: 16px; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+.km-top { display: grid; grid-template-columns: 170px 1fr; gap: 24px; align-items: center; margin-bottom: 8px; }
+.km-stroke { display: grid; gap: 8px; justify-items: center; }
+.km-stroke svg { width: 170px; height: 170px; border-radius: 16px; background: var(--paper); border: 1px solid var(--line); }
+.km-stroke .grid { stroke: var(--line); stroke-width: .6; stroke-dasharray: 2 2; fill: none; }
+.km-stroke .st { fill: none; stroke: var(--ink); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+.km-replay { border: 0; background: none; color: var(--shu); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.km-badges { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
+.km-sc { font-size: 13px; color: var(--muted); }
+.km-info h3 { font-family: "Shippori Mincho", serif; font-size: 26px; line-height: 1.25; padding-right: 30px; }
+.km-k { font-size: 40px; }
+.km-m { text-transform: capitalize; }
+.km-read { display: grid; gap: 4px; margin-top: 10px; }
+.km-read div { display: flex; gap: 10px; align-items: baseline; }
+.km-read dt { font-size: 12px; color: var(--muted); min-width: 82px; }
+.km-read dd { font-size: 17px; color: var(--shu); }
+.kmodal h4 { font-family: "Shippori Mincho", serif; font-size: 16px; margin: 18px 0 6px; display: flex; align-items: center; gap: 10px; }
+.kmodal h4::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.km-h { color: var(--ink); font-size: 15.5px; }
+.km-p { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.km-p span { display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); font-size: 13px; color: var(--muted); }
+.km-p span.whole { background: var(--shu-soft); border-color: transparent; }
+.km-p b { font-family: "Shippori Mincho", serif; font-size: 22px; color: var(--ink); }
+.km-p i { font-style: normal; color: var(--shu); font-weight: 700; }
+.km-ex { list-style: none; display: grid; gap: 6px; }
+.km-ex li { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; padding: 8px 12px; border-radius: 10px; background: var(--paper); }
+.km-ex b { font-family: "Shippori Mincho", serif; font-size: 19px; }
+.km-ex span { color: var(--shu); font-size: 14px; }
+.km-ex em { font-style: normal; color: var(--muted); font-size: 14px; }
+.km-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.km-reel[hidden] { display: none; }
+.km-note { font-style: normal; color: var(--muted); font-size: 14px; }
+.km-random { cursor: pointer; font-family: inherit; color: var(--ink); }
+.km-credit { margin-top: 16px; font-size: 11px; color: var(--muted); opacity: .8; }
 
 /* ---------- kana quiz ---------- */
 .quiz { max-width: 640px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 22px; }
@@ -301,8 +339,12 @@ footer nav svg { width: 15px; height: 15px; fill: currentColor; }
   .kotd-kanji { font-size: 110px; }
   .kotd-right { padding: 24px 22px 26px; }
   .kotd-meaning { font-size: 24px; }
+  .km-top { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .km-badges, .km-read div { justify-content: center; }
+  .km-info h3 { padding-right: 0; }
+  .kmodal { padding: 26px 18px 20px; }
   .q-opts { grid-template-columns: repeat(2, 1fr); }
   .q-char { font-size: 104px; }
   .quiz { padding: 18px; }
 }
-@media (prefers-reduced-motion: reduce) { .kotd.flip, .q-char.pop, .q-opt.wrong { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .kmodal[open], .q-char.pop, .q-opt.wrong { animation: none; } }
