@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Raj in JP · アニメの世界へ</title>
+<meta name="description" content="Raj in JP: watch, learn, explore. Anime, Japan and more." />
+<meta property="og:title" content="Raj in JP" />
+<meta property="og:description" content="Watch · Learn · Explore: Anime, Japan and more." />
+<meta property="og:image" content="rajinjp.jpg" />
+<meta name="theme-color" content="#07050f" />
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { min-height: 100%; }
+  body {
+    background: #07050f;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100svh; overflow-x: hidden;
+  }
+  /* on wide screens, a blurred copy of the art fills the sides */
+  body::before {
+    content: ""; position: fixed; inset: -40px; z-index: 0;
+    background: url("rajinjp.jpg") center / cover no-repeat;
+    filter: blur(28px) brightness(.45) saturate(1.2);
+  }
+  .card {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 520px;
+    aspect-ratio: 1024 / 1536;
+    background: url("rajinjp.jpg") center / 100% 100% no-repeat;
+    box-shadow: 0 0 80px rgba(155, 92, 255, .35);
+  }
+  #sakura { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+  /* clickable areas placed exactly over the buttons in the art */
+  .hit {
+    position: absolute; left: 9.2%; width: 81.8%; height: 7.9%;
+    border-radius: 999px;
+    transition: box-shadow .25s ease, transform .15s ease, background .25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hit:hover, .hit:focus-visible {
+    box-shadow: 0 0 0 2px rgba(196, 160, 255, .9), 0 0 28px 6px rgba(155, 92, 255, .75);
+    background: rgba(155, 92, 255, .08);
+    outline: none;
+  }
+  .hit:active { transform: scale(.97); }
+  .yt { top: 55.0%; }
+  .ig { top: 64.4%; }
+  .an { top: 73.6%; }
+  /* a soft pulse so people know the buttons are tappable */
+  .yt { animation: pulse 2.8s ease-in-out infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(155, 92, 255, 0); }
+    50%      { box-shadow: 0 0 22px 4px rgba(155, 92, 255, .55); }
+  }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  @media (prefers-reduced-motion: reduce) { .yt { animation: none; } }
+</style>
+</head>
+<body>
+<main class="card">
+  <canvas id="sakura" aria-hidden="true"></canvas>
+  <h1 class="sr">Raj in JP</h1>
+
+  <!-- ✏️ EDIT YOUR LINKS HERE -->
+  <a class="hit yt" href="https://www.youtube.com/@YOUR_CHANNEL" target="_blank" rel="noopener" aria-label="Subscribe on YouTube"></a>
+  <a class="hit ig" href="https://www.instagram.com/raj_in_jp" target="_blank" rel="noopener" aria-label="Follow on Instagram"></a>
+  <a class="hit an" href="https://www.youtube.com/@YOUR_CHANNEL/shorts" target="_blank" rel="noopener" aria-label="Watching Anime: anime clips and facts"></a>
+</main>
+
+<script>
+// Extra falling sakura petals on top of the art
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c = document.getElementById('sakura'), x = c.getContext('2d');
+  let W, H, dpr;
+  const fit = () => {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = c.width = c.clientWidth * dpr; H = c.height = c.clientHeight * dpr;
+  };
+  fit(); addEventListener('resize', fit);
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const make = (top) => ({
+    x: rnd(0, W), y: top ? -20 : rnd(0, H), s: rnd(4, 9) * dpr,
+    vy: rnd(.35, .9) * dpr, vx: rnd(-.2, .5) * dpr, r: rnd(0, 6.28), vr: rnd(-.03, .03),
+    sw: rnd(0, 6.28), col: Math.random() < .5 ? '255,150,205' : '255,200,230'
+  });
+  const P = Array.from({ length: 22 }, () => make(false));
+  (function tick() {
+    x.clearRect(0, 0, W, H);
+    for (const p of P) {
+      p.sw += .03; p.r += p.vr; p.x += p.vx + Math.sin(p.sw) * .5 * dpr; p.y += p.vy;
+      if (p.y > H + 20 || p.x > W + 20) Object.assign(p, make(true));
+      x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.scale(1, Math.abs(Math.cos(p.sw)) * .6 + .4);
+      x.beginPath(); x.moveTo(0, -p.s);
+      x.bezierCurveTo(p.s * .9, -p.s * .6, p.s * .7, p.s * .6, 0, p.s);
+      x.bezierCurveTo(-p.s * .7, p.s * .6, -p.s * .9, -p.s * .6, 0, -p.s);
+      x.fillStyle = `rgba(${p.col},.85)`; x.fill(); x.restore();
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+</body>
+</html>
