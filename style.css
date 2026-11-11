@@ -1,60 +1,67 @@
-/* Raj in JP · minimal washi-paper theme */
+/* Raj in JP · minimal washi-paper website */
 :root {
   --paper: #f6f1e7;
+  --paper-2: #efe8da;
   --card: #fffdf8;
   --ink: #1f1d1a;
   --muted: #6f685d;
   --line: #e3dacb;
-  --shu: #c8402f;          /* 朱色 vermilion */
+  --shu: #c8402f;
   --shu-soft: rgba(200, 64, 47, .08);
-  --shadow: 0 1px 2px rgba(60, 40, 20, .05), 0 6px 20px rgba(60, 40, 20, .05);
+  --shadow: 0 1px 2px rgba(60, 40, 20, .05), 0 8px 24px rgba(60, 40, 20, .06);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #15130f; --card: #1d1b17; --ink: #ece6da; --muted: #a39b8d; --line: #2f2b25;
+    --paper: #15130f; --paper-2: #1a1814; --card: #201d19; --ink: #ece6da; --muted: #a39b8d; --line: #2f2b25;
     --shu: #e0604c; --shu-soft: rgba(224, 96, 76, .12); --shadow: none; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #15130f; --card: #1d1b17; --ink: #ece6da; --muted: #a39b8d; --line: #2f2b25;
+  --paper: #15130f; --paper-2: #1a1814; --card: #201d19; --ink: #ece6da; --muted: #a39b8d; --line: #2f2b25;
   --shu: #e0604c; --shu-soft: rgba(224, 96, 76, .12); --shadow: none; color-scheme: dark;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
 body {
   background-color: var(--paper);
-  /* faint washi fibre texture */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
   color: var(--ink);
   font-family: "Zen Kaku Gothic New", system-ui, -apple-system, "Segoe UI", sans-serif;
-  line-height: 1.7;
-  transition: background-color .3s, color .3s;
+  line-height: 1.7; overflow-x: clip;
 }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
+.container { width: min(1120px, 100% - 40px); margin-inline: auto; }
+.shu { color: var(--shu); }
 
-.page { width: min(560px, 100% - 32px); margin: 0 auto; padding: 18px 0 48px; }
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: 15px;
+  transition: border-color .2s, transform .2s, filter .2s; white-space: nowrap;
+}
+.btn:hover { border-color: var(--shu); transform: translateY(-1px); }
+.btn.primary { background: var(--shu); border-color: var(--shu); color: #fff; }
+.btn.primary:hover { filter: brightness(1.07); }
+.btn.sm { padding: 7px 16px; font-size: 14px; }
+.more { display: inline-block; margin-top: 18px; font-weight: 700; color: var(--shu); }
+.more:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-/* faint vertical calligraphy on wide screens */
-.vertical {
-  position: fixed; left: max(24px, calc(50% - 400px)); top: 50%; transform: translateY(-50%);
-  writing-mode: vertical-rl; font-family: "Shippori Mincho", serif; font-size: 15px; letter-spacing: .5em;
-  color: var(--muted); opacity: .45; pointer-events: none;
-}
-@media (max-width: 900px) { .vertical { display: none; } }
-
-/* top bar */
-.topbar { display: flex; justify-content: space-between; align-items: center; height: 40px; }
-.mini-seal {
-  font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 12px; color: #fff; background: var(--shu);
-  padding: 3px 6px; border-radius: 3px; letter-spacing: .1em;
-}
-.theme {
-  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--card);
-  color: var(--ink); font-size: 16px; cursor: pointer; display: grid; place-items: center; transition: border-color .2s;
-}
+/* ---------- nav ---------- */
+.nav { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid transparent; transition: background .3s, border-color .3s; }
+.nav.scrolled { background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-color: var(--line); }
+.nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 20px; }
+.mini-seal { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 11px; color: #fff; background: var(--shu); padding: 3px 5px; border-radius: 3px; letter-spacing: .08em; }
+.menu { display: flex; gap: 32px; font-size: 15px; color: var(--muted); }
+.menu a { position: relative; transition: color .2s; }
+.menu a:hover { color: var(--ink); }
+.menu a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1.5px; background: var(--shu); transform: scaleX(0); transition: transform .25s; }
+.menu a:hover::after { transform: scaleX(1); }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.theme { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; font-size: 15px; }
 .theme:hover { border-color: var(--shu); }
 .theme .moon { display: none; }
 :root[data-theme="dark"] .theme .sun { display: none; }
@@ -64,117 +71,140 @@ img { display: block; max-width: 100%; }
   :root:not([data-theme="light"]) .theme .moon { display: inline; }
 }
 
-/* header */
-.intro { text-align: center; padding: 18px 0 8px; }
-.enso-wrap { position: relative; width: 168px; height: 168px; margin: 0 auto 14px; display: grid; place-items: center; }
-.enso { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.enso path {
-  fill: none; stroke: var(--ink); stroke-width: 5; stroke-linecap: round; opacity: .85;
-  stroke-dasharray: 560; stroke-dashoffset: 560; animation: draw 1.6s cubic-bezier(.6,.1,.3,1) .2s forwards;
-}
+/* ---------- hero ---------- */
+.hero { position: relative; padding: 72px 0 88px; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
+.kicker { display: flex; align-items: center; gap: 12px; font-size: 14px; letter-spacing: .3em; color: var(--shu); margin-bottom: 18px; }
+.kicker .line { width: 36px; height: 1.5px; background: var(--shu); }
+h1 { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: clamp(40px, 5.6vw, 68px); line-height: 1.12; letter-spacing: .01em; }
+.lead { margin-top: 22px; font-size: 18px; color: var(--muted); max-width: 540px; }
+.lead b { color: var(--ink); }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.stats { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 34px; margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--line); }
+.stats dt { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 26px; line-height: 1.1; }
+.stats dd { font-size: 13px; color: var(--muted); }
+.hero-art { position: relative; width: min(380px, 100%); aspect-ratio: 1; justify-self: center; display: grid; place-items: center; }
+.enso { position: absolute; inset: -6%; width: 112%; height: 112%; overflow: visible; }
+.enso path { fill: none; stroke: var(--ink); stroke-width: 3.2; stroke-linecap: round; opacity: .8;
+  stroke-dasharray: 560; stroke-dashoffset: 560; animation: draw 1.8s cubic-bezier(.6,.1,.3,1) .2s forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
-.avatar { width: 120px; height: 120px; border-radius: 50%; box-shadow: var(--shadow); opacity: 0; animation: fade .8s ease .6s forwards; }
-
-h1 {
-  font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 34px; letter-spacing: .04em; line-height: 1.2;
-  display: inline-flex; align-items: center; gap: 10px;
-}
+.hero-art .avatar { width: 84%; height: 84%; border-radius: 50%; box-shadow: var(--shadow); opacity: 0; animation: fade 1s ease .5s forwards; }
+.hero-art .seal { position: absolute; right: 6%; bottom: 8%; }
 .seal {
-  font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 11px; line-height: 1.15;
-  color: #fff; background: var(--shu); border-radius: 3px; padding: 4px 5px; writing-mode: vertical-rl; letter-spacing: .05em;
-  transform: rotate(-4deg) scale(0); animation: stamp .45s cubic-bezier(.3,1.6,.5,1) 1.2s forwards;
+  font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 14px; line-height: 1.15; color: #fff; background: var(--shu);
+  border-radius: 4px; padding: 7px 7px; writing-mode: vertical-rl; transform: rotate(-5deg) scale(0);
+  animation: stamp .45s cubic-bezier(.3,1.6,.5,1) 1.4s forwards;
 }
-@keyframes stamp { to { transform: rotate(-4deg) scale(1); } }
-.handle { color: var(--muted); font-size: 14px; margin-top: 2px; }
-.bio { margin-top: 12px; font-size: 15.5px; }
-.bio b { color: var(--shu); }
-.welcome { margin: 12px auto 0; max-width: 440px; color: var(--muted); font-size: 14.5px; }
-.cta { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
-.btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px;
-  border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: 14.5px;
-  transition: border-color .2s, transform .2s, background .2s;
-}
-.btn svg { width: 17px; height: 17px; fill: currentColor; }
-.btn:hover { border-color: var(--shu); transform: translateY(-1px); }
-.btn.primary { background: var(--shu); border-color: var(--shu); color: #fff; }
-.btn.primary:hover { filter: brightness(1.06); }
+@keyframes stamp { to { transform: rotate(-5deg) scale(1); } }
+@keyframes fade { to { opacity: 1; } }
+.vertical { position: absolute; right: max(16px, calc(50% - 640px)); top: 80px; writing-mode: vertical-rl; font-family: "Shippori Mincho", serif; letter-spacing: .5em; color: var(--muted); opacity: .45; font-size: 15px; }
 
-/* sections */
-section { margin-top: 40px; }
-h2 {
-  font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 20px; letter-spacing: .03em;
-  display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
-}
-h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-.jp-label {
-  font-size: 12px; font-weight: 700; color: var(--shu); border: 1px solid var(--shu); border-radius: 3px;
-  padding: 1px 6px; letter-spacing: .1em;
-}
-.note { color: var(--muted); font-size: 13.5px; margin: -4px 0 12px; }
+/* ---------- links strip ---------- */
+.strip { border-block: 1px solid var(--line); background: var(--paper-2); }
+.links { display: grid; grid-template-columns: repeat(4, 1fr); }
+.links a { padding: 22px 24px; border-right: 1px solid var(--line); transition: background .2s; position: relative; }
+.links a:first-child { border-left: 1px solid var(--line); }
+.links a::after { content: "›"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 20px; transition: transform .2s, color .2s; }
+.links a:hover { background: var(--card); }
+.links a:hover::after { color: var(--shu); transform: translate(4px, -50%); }
+.links b { display: block; font-size: 16px; }
+.links small { color: var(--muted); font-size: 13px; }
 
-/* link rows */
-.rows { display: grid; gap: 10px; }
-.row {
-  display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 12px;
-  background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow);
-  transition: border-color .2s, transform .2s;
-}
-.row:hover { border-color: var(--shu); transform: translateX(3px); }
-.ico {
-  flex: none; width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center;
-  background: var(--shu-soft); color: var(--shu); font-size: 18px; font-weight: 700;
-}
-.ico.kana { font-family: "Shippori Mincho", serif; font-size: 22px; }
-.txt { flex: 1; min-width: 0; }
-.txt b { display: block; font-size: 15.5px; }
-.txt small { display: block; color: var(--muted); font-size: 13px; line-height: 1.45; }
-.arr { flex: none; color: var(--muted); font-size: 20px; transition: color .2s, transform .2s; }
-.row:hover .arr { color: var(--shu); transform: translateX(3px); }
+/* ---------- blocks ---------- */
+.block { padding: 96px 0; }
+.block.alt { background: var(--paper-2); border-block: 1px solid var(--line); }
+.head { margin-bottom: 38px; max-width: 640px; }
+.label { display: inline-block; font-size: 12px; font-weight: 700; color: var(--shu); border: 1px solid var(--shu); border-radius: 3px; padding: 1px 7px; letter-spacing: .12em; margin-bottom: 10px; }
+h2 { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: clamp(30px, 3.6vw, 42px); line-height: 1.2; }
+.head p { color: var(--muted); margin-top: 8px; font-size: 16.5px; }
 
-/* videos */
-.videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.video {
-  display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: var(--card);
-  border: 1px solid var(--line); box-shadow: var(--shadow); transition: border-color .2s, transform .2s;
-}
-.video:hover { border-color: var(--shu); transform: translateY(-2px); }
-.video img { aspect-ratio: 1; width: 100%; height: auto; object-fit: cover; filter: saturate(.9); }
-.vt { padding: 9px 10px 0; flex: 1; }
-.vt b { display: block; font-size: 13px; line-height: 1.4; }
-.vt small { color: var(--muted); font-size: 12px; }
-.play { padding: 6px 10px 10px; font-size: 12.5px; font-weight: 700; color: var(--shu); }
-.more { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 700; color: var(--shu); }
-.more:hover { text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 460px) {
-  .videos { grid-template-columns: 1fr; }
-  .video { flex-direction: row; align-items: center; }
-  .video img { width: 84px; height: 84px; flex: none; }
-  .vt { padding: 8px 12px; }
-  .play { padding: 0 12px 0 0; }
-}
+/* reels (Instagram embeds) */
+.reels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.reels .instagram-media { min-width: 0 !important; width: 100% !important; max-width: 100% !important; margin: 0 !important; border-radius: 14px !important; border: 1px solid var(--line) !important; box-shadow: var(--shadow) !important; background: var(--card) !important; }
+.reels blockquote.instagram-media { padding: 0 !important; overflow: hidden; }
+.reel-fallback { display: block; position: relative; }
+.reel-fallback img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; }
+.reel-fallback .cap { position: absolute; left: 0; right: 0; bottom: 44px; padding: 40px 16px 6px; color: #fff; font-weight: 700; font-size: 15px; line-height: 1.4; background: linear-gradient(transparent, rgba(0,0,0,.65)); }
+.reel-fallback .play { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 16px 14px; color: #fff; font-weight: 700; font-size: 13.5px; background: rgba(0,0,0,.65); }
+.reels iframe.instagram-media { min-height: 560px; }
+
+/* YouTube */
+.yt { display: grid; grid-template-columns: repeat(2, minmax(0, 300px)) 1fr; gap: 24px; align-items: center; }
+.yt-frame { position: relative; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #000; box-shadow: var(--shadow); }
+.yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.yt-side { padding-left: 16px; }
+.yt-side h3 { font-family: "Shippori Mincho", serif; font-size: 26px; margin-bottom: 8px; }
+.yt-side p { color: var(--muted); margin-bottom: 22px; }
+.yt-side .more { display: block; }
+
+/* free sheets */
+.sheets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.sheet { position: relative; display: flex; flex-direction: column; padding: 30px 28px 26px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); transition: border-color .2s, transform .2s; overflow: hidden; }
+.sheet:hover { border-color: var(--shu); transform: translateY(-3px); }
+.sheet .big { font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 64px; line-height: 1; color: var(--shu); margin-bottom: 18px; }
+.sheet b { font-size: 19px; }
+.sheet small { color: var(--muted); font-size: 14px; margin-top: 4px; flex: 1; }
+.sheet .dl { margin-top: 20px; font-weight: 700; font-size: 14px; color: var(--shu); }
+.sheet::after { content: ""; position: absolute; right: -30px; top: -30px; width: 110px; height: 110px; border-radius: 50%; border: 1px solid var(--line); }
 
 /* about */
-.about p { color: var(--muted); font-size: 15px; }
-.about .motto { margin-top: 10px; font-family: "Shippori Mincho", serif; font-size: 18px; color: var(--ink); }
-.about .motto span { font-family: "Zen Kaku Gothic New", sans-serif; font-size: 13px; color: var(--muted); margin-left: 6px; }
+.about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: center; }
+.about p { color: var(--muted); margin-top: 14px; font-size: 16.5px; max-width: 600px; }
+.about .motto { font-family: "Shippori Mincho", serif; font-size: 22px; color: var(--ink); }
+.about .motto span { font-family: "Zen Kaku Gothic New", sans-serif; font-size: 14px; color: var(--muted); margin-left: 8px; }
+.about .collab a { color: var(--shu); font-weight: 700; }
+.facts { list-style: none; display: grid; gap: 12px; }
+.facts li { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+.facts b { font-size: 22px; }
 
 /* footer */
-footer { margin-top: 52px; text-align: center; display: grid; justify-items: center; gap: 6px; }
-.seal.big { font-size: 15px; padding: 7px 7px; writing-mode: horizontal-tb; transform: rotate(-4deg); animation: none; border-radius: 4px; text-align: center; }
-.jp-line { font-family: "Shippori Mincho", serif; font-size: 16px; letter-spacing: .3em; margin-top: 6px; }
-footer small { color: var(--muted); font-size: 12px; }
-footer small a { text-decoration: underline; text-underline-offset: 2px; }
-footer .credit { opacity: .7; font-size: 11px; }
+footer { padding: 56px 0 44px; text-align: center; }
+.foot { display: grid; justify-items: center; gap: 10px; }
+footer .seal { writing-mode: horizontal-tb; animation: none; transform: rotate(-5deg); text-align: center; }
+.jp-line { font-family: "Shippori Mincho", serif; font-size: 17px; letter-spacing: .35em; margin-top: 6px; }
+footer nav { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; font-size: 14px; color: var(--muted); }
+footer nav a:hover { color: var(--shu); }
+footer small { color: var(--muted); font-size: 12px; opacity: .8; }
 
-/* gentle reveal */
-section, footer { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
-section.in, footer.in { opacity: 1; transform: none; }
-@keyframes fade { to { opacity: 1; } }
+/* reveal */
+.block, .strip, footer { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
+.block.in, .strip.in, footer.in { opacity: 1; transform: none; }
 
+/* ---------- responsive ---------- */
+@media (max-width: 960px) {
+  .menu { display: none; }
+  .hero { padding: 40px 0 64px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero-art { width: min(260px, 70%); grid-row: 1; }
+  .hero-text { text-align: center; }
+  .kicker { justify-content: center; }
+  .lead { margin-inline: auto; }
+  .cta { justify-content: center; }
+  .stats { grid-template-columns: repeat(2, 1fr); justify-content: stretch; gap: 22px; text-align: center; }
+  .vertical { display: none; }
+  .links { grid-template-columns: repeat(2, 1fr); }
+  .links a:nth-child(3) { border-left: 1px solid var(--line); }
+  .links a:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .reels { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
+  .yt { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .yt-side { grid-column: 1 / -1; padding: 8px 0 0; text-align: center; }
+  .sheets { grid-template-columns: 1fr; }
+  .about { grid-template-columns: 1fr; gap: 32px; }
+  .block { padding: 72px 0; }
+}
+@media (max-width: 520px) {
+  .container { width: calc(100% - 32px); }
+  .links { grid-template-columns: 1fr; }
+  .links a, .links a:first-child, .links a:nth-child(3) { border-left: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .links a:last-child { border-bottom: 0; }
+  .yt { gap: 12px; }
+  .lead { font-size: 16.5px; }
+  .brand { font-size: 18px; }
+}
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .enso path { animation: none; stroke-dashoffset: 0; }
-  .avatar { animation: none; opacity: 1; }
-  .seal { animation: none; transform: rotate(-4deg); }
-  section, footer { opacity: 1; transform: none; transition: none; }
+  .hero-art .avatar { animation: none; opacity: 1; }
+  .seal { animation: none; transform: rotate(-5deg); }
+  .block, .strip, footer { opacity: 1; transform: none; transition: none; }
 }
